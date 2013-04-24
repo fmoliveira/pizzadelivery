@@ -8,6 +8,12 @@
 package com.example.pizzadelivery;
 
 public final class R {
+    public static final class array {
+        public static final int descricoes_pizzas=0x7f060001;
+        public static final int nomes_pizzas=0x7f060000;
+        public static final int precos_pizzas_gigantes=0x7f060003;
+        public static final int precos_pizzas_grandes=0x7f060002;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -22,28 +28,43 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int mariopizzaiolo=0x7f020001;
+        public static final int pizza1=0x7f020002;
+        public static final int pizza2=0x7f020003;
+        public static final int pizza3=0x7f020004;
+        public static final int pizza4=0x7f020005;
+        public static final int pizza5=0x7f020006;
+        public static final int pizza6=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f080003;
-        public static final int btnFazerPedido=0x7f080002;
-        public static final int btnSair=0x7f080001;
-        public static final int lblEscolhaPizza=0x7f080000;
+        public static final int action_settings=0x7f09000c;
+        public static final int btnFazerPedido=0x7f090003;
+        public static final int btnSair=0x7f090004;
+        public static final int imgLogotipo=0x7f090002;
+        public static final int imgSaborPizza=0x7f090005;
+        public static final int pager=0x7f090000;
+        public static final int pager_title_strip=0x7f090001;
+        public static final int radTamanhoPizza=0x7f090008;
+        public static final int tam_pizza_gigante=0x7f09000a;
+        public static final int tam_pizza_grande=0x7f090009;
+        public static final int textView1=0x7f090007;
+        public static final int txtDescricaoPizza=0x7f090006;
+        public static final int txtPrecoPizza=0x7f09000b;
     }
     public static final class layout {
         public static final int activity_escolha_pizza=0x7f030000;
         public static final int activity_tela_principal=0x7f030001;
+        public static final int fragment_escolha_pizza_dummy=0x7f030002;
     }
     public static final class menu {
-        public static final int escolha_pizza=0x7f070000;
-        public static final int tela_principal=0x7f070001;
+        public static final int escolha_pizza=0x7f080000;
+        public static final int tela_principal=0x7f080001;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int escolha_o_sabor_de_sua_pizza_=0x7f050005;
-        public static final int fazer_pedido=0x7f050002;
-        public static final int sair=0x7f050003;
-        public static final int title_activity_escolha_pizza=0x7f050004;
+        public static final int menu_fazer_pedido=0x7f050002;
+        public static final int menu_sair=0x7f050003;
     }
     public static final class style {
         /** 
@@ -67,10 +88,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }
