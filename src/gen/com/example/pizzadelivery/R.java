@@ -28,40 +28,45 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int mariopizzaiolo=0x7f020001;
-        public static final int pizza1=0x7f020002;
-        public static final int pizza2=0x7f020003;
-        public static final int pizza3=0x7f020004;
-        public static final int pizza4=0x7f020005;
-        public static final int pizza5=0x7f020006;
-        public static final int pizza6=0x7f020007;
+        public static final int ic_meu_pedido=0x7f020001;
+        public static final int mariopizzaiolo=0x7f020002;
+        public static final int pizza1=0x7f020003;
+        public static final int pizza2=0x7f020004;
+        public static final int pizza3=0x7f020005;
+        public static final int pizza4=0x7f020006;
+        public static final int pizza5=0x7f020007;
+        public static final int pizza6=0x7f020008;
     }
     public static final class id {
-        public static final int action_settings=0x7f09000c;
-        public static final int btnFazerPedido=0x7f090003;
-        public static final int btnSair=0x7f090004;
-        public static final int imgLogotipo=0x7f090002;
-        public static final int imgSaborPizza=0x7f090005;
+        public static final int btnAdicionarPizza=0x7f090007;
+        public static final int btnEscolherBebidas=0x7f090008;
+        public static final int btnFazerPedido=0x7f09000b;
+        public static final int btnSair=0x7f09000c;
+        public static final int imgLogotipo=0x7f09000a;
+        public static final int imgSaborPizza=0x7f09000d;
+        public static final int lstPedido=0x7f090009;
+        public static final int mnMeuPedido=0x7f09000f;
         public static final int pager=0x7f090000;
         public static final int pager_title_strip=0x7f090001;
-        public static final int radTamanhoPizza=0x7f090008;
-        public static final int tam_pizza_gigante=0x7f09000a;
-        public static final int tam_pizza_grande=0x7f090009;
-        public static final int textView1=0x7f090007;
-        public static final int txtDescricaoPizza=0x7f090006;
-        public static final int txtPrecoPizza=0x7f09000b;
+        public static final int radTamanhoPizza=0x7f090003;
+        public static final int tam_pizza_gigante=0x7f090005;
+        public static final int tam_pizza_grande=0x7f090004;
+        public static final int txtDescricaoPizza=0x7f09000e;
+        public static final int txtPrecoPizza=0x7f090006;
+        public static final int txtTamanho=0x7f090002;
     }
     public static final class layout {
         public static final int activity_escolha_pizza=0x7f030000;
-        public static final int activity_tela_principal=0x7f030001;
-        public static final int fragment_escolha_pizza_dummy=0x7f030002;
+        public static final int activity_pedido=0x7f030001;
+        public static final int activity_tela_principal=0x7f030002;
+        public static final int fragment_escolha_pizza_dummy=0x7f030003;
+        public static final int item_pedido=0x7f030004;
     }
     public static final class menu {
-        public static final int escolha_pizza=0x7f080000;
-        public static final int tela_principal=0x7f080001;
+        public static final int menu_pedido=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
+        public static final int action_meu_pedido=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int menu_fazer_pedido=0x7f050002;
         public static final int menu_sair=0x7f050003;

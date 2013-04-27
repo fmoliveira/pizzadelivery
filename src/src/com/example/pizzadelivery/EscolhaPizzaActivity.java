@@ -2,16 +2,21 @@ package com.example.pizzadelivery;
 
 import java.util.Locale;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -35,6 +40,8 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+	RadioGroup mTamanhoPizza;
+	TextView mPrecoPizza;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +56,81 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+			
+			@Override
+			public void onPageSelected(int arg0) {
+				AtualizarInfoPizza();
+			}
+			
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// nada a ser feito
+			}
+			
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// nada a ser feito
+			}
+		});
+		
+		// Configura os demais componentes
+		mTamanhoPizza = (RadioGroup) findViewById(R.id.radTamanhoPizza);
+		mPrecoPizza = (TextView) findViewById(R.id.txtPrecoPizza);
+		
+		// Configura o listener do tamanho da pizza
+		mTamanhoPizza.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				AtualizarInfoPizza();
+			}
+		});
+		
+		// Configura os botões
+		Button btnAdicionarPizza = (Button) findViewById(R.id.btnAdicionarPizza);
+		btnAdicionarPizza.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				AdicionarPizza();
+			}
+		});
+	}
+	
+	private void AtualizarInfoPizza()
+	{
+		int[] precos = (mTamanhoPizza.getCheckedRadioButtonId() == R.id.tam_pizza_grande) ? getResources().getIntArray(R.array.precos_pizzas_grandes) : getResources().getIntArray(R.array.precos_pizzas_gigantes);
+		mPrecoPizza.setText(String.format("R$ %d,00", precos[mViewPager.getCurrentItem()]));
+	}
+	
+	private void AdicionarPizza()
+	{
+		Pedido.addPizza(mViewPager.getCurrentItem(), (mTamanhoPizza.getCheckedRadioButtonId() == R.id.tam_pizza_grande) ? 0 : 1);
+		Intent k = new Intent(this, PedidoActivity.class);
+		startActivity(k);
+		Toast.makeText(getApplicationContext(), "Pizza adicionada!", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.escolha_pizza, menu);
+		getMenuInflater().inflate(R.menu.menu_pedido, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId())
+		{
+			case R.id.mnMeuPedido:
+				Intent k = new Intent(this, PedidoActivity.class);
+				startActivity(k);
+				break;
+				
+			default:
+				break;
+		}
 		return true;
 	}
 
@@ -115,16 +191,11 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 			
 			ImageView imgSaborPizza = (ImageView) rootView.findViewById(R.id.imgSaborPizza);
 			TextView txtDescricaoPizza = (TextView) rootView.findViewById(R.id.txtDescricaoPizza);
-			TextView txtPrecoPizza = (TextView) rootView.findViewById(R.id.txtPrecoPizza);
-//			RadioGroup radTamanhoPizza = (RadioGroup) rootView.findViewById(R.id.radTamanhoPizza);
 			
 			imgSaborPizza.setImageResource(getResources().getIdentifier(String.format("pizza%d", getArguments().getInt(ARG_SECTION_NUMBER)), "drawable", "com.example.pizzadelivery"));
 			
 			String[] descricoes = getResources().getStringArray(R.array.descricoes_pizzas);
 			txtDescricaoPizza.setText(descricoes[(getArguments().getInt(ARG_SECTION_NUMBER) - 1)]);
-			
-			int[] precos = getResources().getIntArray(R.array.precos_pizzas_grandes);
-			txtPrecoPizza.setText(String.format("R$ %d,00", precos[(getArguments().getInt(ARG_SECTION_NUMBER) - 1)]));
 			
 			return rootView;
 		}

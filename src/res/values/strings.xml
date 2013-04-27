@@ -2,9 +2,10 @@
 <resources>
 
     <string name="app_name">Pizza Delivery</string>
-    <string name="action_settings">Configurações</string>
+    <string name="action_meu_pedido">Meu Pedido</string>
     <string name="menu_fazer_pedido">Fazer Pedido</string>
     <string name="menu_sair">Sair</string>
+
     <string-array name="nomes_pizzas">
         <item>Calabresa</item>
         <item>Coreana</item>
@@ -12,36 +13,31 @@
         <item>Country</item>
         <item>Marguerita</item>
         <item>Supreme</item>
-    </string-array><string-array name="descricoes_pizzas">
-        <item >Calabresa, mussarela, cebola e azeitonas.</item>
-        <item >Queijo cheddar cremoso, frango, champignon e mussarela.</item>
-        <item >Milho, bacon e mussarela.</item>
-        <item >Mussarela, frango, bacon e cream cheese.</item>
-        <item >Mussarela, manjericão, tomate e requeijão cremoso.</item>
-        <item >Carnes bovina e suína, pepperoni, mussarela, champignon, pimentão e cebola.</item>
     </string-array>
+    <string-array name="descricoes_pizzas">
+        <item>Calabresa, mussarela, cebola e azeitonas.</item>
+        <item>Queijo cheddar cremoso, frango, champignon e mussarela.</item>
+        <item>Milho, bacon e mussarela.</item>
+        <item>Mussarela, frango, bacon e cream cheese.</item>
+        <item>Mussarela, manjericão, tomate e requeijão cremoso.</item>
+        <item>Carnes bovina e suína, pepperoni, mussarela, champignon, pimentão e cebola.</item>
+    </string-array>
+
     <integer-array name="precos_pizzas_grandes">
-        <item >50</item>
-        <item >52</item>
-        <item >54</item>
-        <item >53</item>
-        <item >57</item>
-        <item >59</item>
+        <item>50</item>
+        <item>52</item>
+        <item>54</item>
+        <item>53</item>
+        <item>57</item>
+        <item>59</item>
     </integer-array>
     <integer-array name="precos_pizzas_gigantes">
-        <item >64</item>
-        <item >68</item>
-        <item >69</item>
-        <item >67</item>
-        <item >70</item>
-        <item >72</item>
+        <item>64</item>
+        <item>68</item>
+        <item>69</item>
+        <item>67</item>
+        <item>70</item>
+        <item>72</item>
     </integer-array>
-    
-    
-    
-    
-    
-    
-    
 
 </resources>

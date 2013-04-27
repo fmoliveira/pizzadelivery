@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -22,8 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.pizzadelivery.EscolhaPizzaActivity" >
+        </activity>
         <activity
-            android:name="com.example.pizzadelivery.EscolhaPizzaActivity" >
+            android:name="com.example.pizzadelivery.PedidoActivity" android:label="@string/action_meu_pedido">
         </activity>
     </application>
 
