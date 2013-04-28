@@ -5,58 +5,63 @@ import java.util.List;
 
 public final class Pedido {
 	
-	public static final Pedido MeuPedido = new Pedido();
-
-	private List<Pizza> Pizzas;
+	private static List<ItemPedido> mMeuPedido;
 	
-	public List<Pizza> getPizzas()
+	public static List<ItemPedido> getMeuPedido()
 	{
-		return Pizzas;
+		return mMeuPedido;
 	}
 	
 	private Pedido()
 	{
-		ResetarPedido();
-	}
-	
-	public static Pedido getPedido()
-	{
-		return MeuPedido;
+		//
 	}
 	
 	public static void addPizza(int id, int tamanho)
 	{
 		int i;
-		Pizza p;
+		ItemPedido item;
+		TiposPedido tipo;
 		
-		for (i = 0; i < MeuPedido.Pizzas.size(); i++)
+		if (mMeuPedido != null)
 		{
-			p = MeuPedido.Pizzas.get(i);
-			
-			if (p.getId() == id)
+			for (i = 0; i < mMeuPedido.size(); i++)
 			{
-				if (p.getTamanho() == tamanho)
+				item = mMeuPedido.get(i);
+				tipo = TiposPedido.values()[item.getTipo()];
+				
+				if (tipo == TiposPedido.Pizza)
 				{
-					p.setQuantidade(p.getQuantidade() + 1);
-					return;
+					if (item.getId() == id)
+					{
+						if (item.getTamanho() == tamanho)
+						{
+							item.setQuantidade(item.getQuantidade() + 1);
+							return;
+						}
+					}
 				}
 			}
 		}
+		else
+		{
+			resetarPedido();
+		}
 		
-		p = new Pizza(id,  tamanho);
-		p.setQuantidade(1);
-		MeuPedido.Pizzas.add(p);
+		item = new Pizza(id, tamanho);
+		item.setQuantidade(1);
+		mMeuPedido.add(item);
 	}
 	
-	public void ResetarPedido()
+	public static void resetarPedido()
 	{
-		if (Pizzas == null)
+		if (mMeuPedido == null)
 		{
-			Pizzas = new ArrayList<Pizza>();
+			mMeuPedido = new ArrayList<ItemPedido>();
 		}
 		else
 		{
-			Pizzas.clear();
+			mMeuPedido.clear();
 		}
 	}
 	

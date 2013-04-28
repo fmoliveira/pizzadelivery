@@ -100,13 +100,15 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 	
 	private void AtualizarInfoPizza()
 	{
-		int[] precos = (mTamanhoPizza.getCheckedRadioButtonId() == R.id.tam_pizza_grande) ? getResources().getIntArray(R.array.precos_pizzas_grandes) : getResources().getIntArray(R.array.precos_pizzas_gigantes);
-		mPrecoPizza.setText(String.format("R$ %d,00", precos[mViewPager.getCurrentItem()]));
+		int id = mViewPager.getCurrentItem();
+		int tamanho = (mTamanhoPizza.getCheckedRadioButtonId() == R.id.tam_pizza_grande) ? TamanhosPizza.Grande.getTamanhoPizza() : TamanhosPizza.Gigante.getTamanhoPizza();
+		double valor = TabelaPrecos.getValorUnitario(TiposPedido.Pizza.getTipoPedido(), id, tamanho);
+		mPrecoPizza.setText(String.format("R$ %.2f", valor));
 	}
 	
 	private void AdicionarPizza()
 	{
-		Pedido.addPizza(mViewPager.getCurrentItem(), (mTamanhoPizza.getCheckedRadioButtonId() == R.id.tam_pizza_grande) ? 0 : 1);
+		Pedido.addPizza(mViewPager.getCurrentItem(), (mTamanhoPizza.getCheckedRadioButtonId() == R.id.tam_pizza_grande) ? TamanhosPizza.Grande.getTamanhoPizza() : TamanhosPizza.Gigante.getTamanhoPizza());
 		Intent k = new Intent(this, PedidoActivity.class);
 		startActivity(k);
 		Toast.makeText(getApplicationContext(), "Pizza adicionada!", Toast.LENGTH_SHORT).show();
@@ -158,14 +160,12 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 
 		@Override
 		public int getCount() {
-			return getResources().getStringArray(R.array.descricoes_pizzas).length;
+			return SaboresPizza.getQtdeSabores();
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			String[] nomes = getResources().getStringArray(R.array.nomes_pizzas);
-			return nomes[position].toUpperCase(l);
+			return SaboresPizza.values()[position].getNome();
 		}
 	}
 
@@ -184,18 +184,14 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(
-					R.layout.fragment_escolha_pizza_dummy, container, false);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+		{
+			View rootView = inflater.inflate(R.layout.fragment_escolha_pizza_dummy, container, false);
 			
 			ImageView imgSaborPizza = (ImageView) rootView.findViewById(R.id.imgSaborPizza);
 			TextView txtDescricaoPizza = (TextView) rootView.findViewById(R.id.txtDescricaoPizza);
-			
 			imgSaborPizza.setImageResource(getResources().getIdentifier(String.format("pizza%d", getArguments().getInt(ARG_SECTION_NUMBER)), "drawable", "com.example.pizzadelivery"));
-			
-			String[] descricoes = getResources().getStringArray(R.array.descricoes_pizzas);
-			txtDescricaoPizza.setText(descricoes[(getArguments().getInt(ARG_SECTION_NUMBER) - 1)]);
+			txtDescricaoPizza.setText(SaboresPizza.values()[getArguments().getInt(ARG_SECTION_NUMBER) - 1].getDescricao());
 			
 			return rootView;
 		}

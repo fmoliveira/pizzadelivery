@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class TelaPrincipalActivity extends Activity {
 
@@ -14,27 +16,36 @@ public class TelaPrincipalActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tela_principal);
 		
-		findViewById(R.id.btnFazerPedido).setOnClickListener(
-				new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						FazerPedido();
-					}
-				});
+		Button btnFazerPedido = (Button) findViewById(R.id.btnFazerPedido);
+		if (btnFazerPedido != null)
+		{
+			btnFazerPedido.setOnClickListener(
+					new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							FazerPedido();
+						}
+					});
+		}
 		
-		findViewById(R.id.btnSair).setOnClickListener(
-				new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						finish();
-					}
-				});
+		Button btnSair = (Button) findViewById(R.id.btnSair);
+		if (btnSair != null)
+		{
+			btnSair.setOnClickListener(
+					new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							finish();
+						}
+					});
+		}
 	}
 	
 	private void FazerPedido()
 	{
+		Pedido.resetarPedido();
 		Intent k = new Intent(this, EscolhaPizzaActivity.class);
 		startActivity(k);
 	}
