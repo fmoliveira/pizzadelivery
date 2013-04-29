@@ -5,10 +5,10 @@
 
     <ImageView
         android:id="@+id/imgSaborPizza"
-        android:layout_width="250dp"
-        android:layout_height="150dp"
+        android:layout_width="290dp"
+        android:layout_height="160dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/pizza1" />
 
