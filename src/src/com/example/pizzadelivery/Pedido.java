@@ -12,31 +12,37 @@ public final class Pedido {
 		return mMeuPedido;
 	}
 	
+	private static double mValorTotal = 0.0;
+	
+	public static double getValorTotal()
+	{
+		return mValorTotal;
+	}
+	
 	private Pedido()
 	{
 		//
 	}
 	
-	public static void addPizza(int id, int tamanho)
+	public static void addItem(int tipo, int id, int tamanho)
 	{
 		int i;
-		ItemPedido item;
-		TiposPedido tipo;
+		ItemPedido item = null;
 		
 		if (mMeuPedido != null)
 		{
 			for (i = 0; i < mMeuPedido.size(); i++)
 			{
 				item = mMeuPedido.get(i);
-				tipo = TiposPedido.values()[item.getTipo()];
 				
-				if (tipo == TiposPedido.Pizza)
+				if (item.getTipo() == tipo)
 				{
 					if (item.getId() == id)
 					{
 						if (item.getTamanho() == tamanho)
 						{
 							item.setQuantidade(item.getQuantidade() + 1);
+							mValorTotal += item.getValorUnitario();
 							return;
 						}
 					}
@@ -48,9 +54,21 @@ public final class Pedido {
 			resetarPedido();
 		}
 		
-		item = new Pizza(id, tamanho);
-		item.setQuantidade(1);
-		mMeuPedido.add(item);
+		if (tipo == TiposPedido.Pizza.getTipoPedido())
+		{
+			item = new Pizza(id, tamanho);
+		}
+		else if (tipo == TiposPedido.Bebida.getTipoPedido())
+		{
+			item = new Bebida(id);
+		}
+		
+		if (item != null)
+		{
+			item.setQuantidade(1);
+			mValorTotal += item.getValorUnitario();
+			mMeuPedido.add(item);
+		}
 	}
 	
 	public static void resetarPedido()
@@ -63,6 +81,7 @@ public final class Pedido {
 		{
 			mMeuPedido.clear();
 		}
+		mValorTotal = 0.0;
 	}
 	
 }

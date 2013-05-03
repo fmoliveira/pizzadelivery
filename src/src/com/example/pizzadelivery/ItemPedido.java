@@ -67,7 +67,9 @@ public class ItemPedido {
 		}
 		else if (this.Tipo == TiposPedido.Bebida.getTipoPedido())
 		{
-			s = "Bebida";
+			s = String.format("%s"
+					, TiposBebidas.values()[this.Id].getNome()
+				);
 		}
 		else
 		{

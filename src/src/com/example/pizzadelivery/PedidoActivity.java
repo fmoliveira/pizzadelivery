@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class PedidoActivity extends Activity {
 
@@ -26,6 +27,9 @@ public class PedidoActivity extends Activity {
 		ListView lstPedidos = (ListView) findViewById(R.id.lstPedido);
 		AdapterListaPedidos adapter = new AdapterListaPedidos(this, Pedido.getMeuPedido());
 		lstPedidos.setAdapter(adapter);
+		
+		TextView txtValorTotal = (TextView) findViewById(R.id.txtValorTotal);
+		txtValorTotal.setText(String.format("%.2f", Pedido.getValorTotal()));
 	}
 
 }

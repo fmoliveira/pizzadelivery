@@ -25,7 +25,12 @@
         <activity android:name="com.example.pizzadelivery.EscolhaPizzaActivity" >
         </activity>
         <activity
-            android:name="com.example.pizzadelivery.PedidoActivity" android:label="@string/action_meu_pedido">
+            android:name="com.example.pizzadelivery.PedidoActivity"
+            android:label="@string/action_meu_pedido" >
+        </activity>
+        <activity
+            android:name="com.example.pizzadelivery.EscolhaBebidaActivity"
+            android:label="@string/title_activity_escolha_bebida" >
         </activity>
     </application>
 

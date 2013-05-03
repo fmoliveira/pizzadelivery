@@ -1,27 +1,31 @@
 package com.example.pizzadelivery;
 
+import java.util.Locale;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.TextView;
 
-public class EscolhaPizzaActivity extends FragmentActivity {
+public class EscolhaBebidaActivity extends FragmentActivity {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -37,13 +41,12 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
-	RadioGroup mTamanhoPizza;
-	TextView mPrecoPizza;
+	TextView mPrecoBebida;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_escolha_pizza);
+		setContentView(R.layout.activity_escolha_bebida);
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -51,13 +54,13 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 				getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pagerPizzas);
+		mViewPager = (ViewPager) findViewById(R.id.pagerBebidas);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 			
 			@Override
 			public void onPageSelected(int arg0) {
-				AtualizarInfoPizza();
+				AtualizarInfoBebida();
 			}
 			
 			@Override
@@ -72,55 +75,45 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 		});
 		
 		// Configura os demais componentes
-		mTamanhoPizza = (RadioGroup) findViewById(R.id.radTamanhoPizza);
-		mPrecoPizza = (TextView) findViewById(R.id.txtPrecoPizza);
-		
-		// Configura o listener do tamanho da pizza
-		mTamanhoPizza.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				AtualizarInfoPizza();
-			}
-		});
+		mPrecoBebida = (TextView) findViewById(R.id.txtPrecoBebida);
 		
 		// Configura os botões
-		Button btnAdicionarPizza = (Button) findViewById(R.id.btnAdicionarPizza);
-		btnAdicionarPizza.setOnClickListener(new OnClickListener() {
+		Button btnAdicionarBebida = (Button) findViewById(R.id.btnAdicionarBebida);
+		btnAdicionarBebida.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				AdicionarPizza();
+				AdicionarBebida();
 			}
 		});
 		
-		Button btnEscolherBebidas = (Button) findViewById(R.id.btnEscolherBebidas);
-		btnEscolherBebidas.setOnClickListener(new OnClickListener() {
+		Button btnFecharPedido = (Button) findViewById(R.id.btnFecharPedido);
+		btnFecharPedido.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				EscolherBebidas();
+				FecharPedido();
 			}
 		});
+
 	}
 	
-	private void AtualizarInfoPizza()
+	private void AtualizarInfoBebida()
 	{
 		int id = mViewPager.getCurrentItem();
-		int tamanho = (mTamanhoPizza.getCheckedRadioButtonId() == R.id.tam_pizza_grande) ? TamanhosPizza.Grande.getTamanhoPizza() : TamanhosPizza.Gigante.getTamanhoPizza();
-		double valor = TabelaPrecos.getValorUnitario(TiposPedido.Pizza.getTipoPedido(), id, tamanho);
-		mPrecoPizza.setText(String.format("R$ %.2f", valor));
+		double valor = TabelaPrecos.getValorUnitario(TiposPedido.Bebida.getTipoPedido(), id, 0);
+		mPrecoBebida.setText(String.format("R$ %.2f", valor));
 	}
 	
-	private void AdicionarPizza()
+	private void AdicionarBebida()
 	{
-		Pedido.addItem(TiposPedido.Pizza.getTipoPedido(), mViewPager.getCurrentItem(), (mTamanhoPizza.getCheckedRadioButtonId() == R.id.tam_pizza_grande) ? TamanhosPizza.Grande.getTamanhoPizza() : TamanhosPizza.Gigante.getTamanhoPizza());
-		Toast.makeText(getApplicationContext(), "Pizza adicionada!", Toast.LENGTH_SHORT).show();
+		Pedido.addItem(TiposPedido.Bebida.getTipoPedido(), mViewPager.getCurrentItem(), 0);
+		Toast.makeText(getApplicationContext(), "Bebida adicionada!", Toast.LENGTH_SHORT).show();
 	}
 	
-	private void EscolherBebidas()
+	private void FecharPedido()
 	{
-		Intent k = new Intent(this, EscolhaBebidaActivity.class);
+		Intent k = new Intent(this, PedidoActivity.class);
 		startActivity(k);
 		this.finish();
 	}
@@ -171,12 +164,12 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 
 		@Override
 		public int getCount() {
-			return SaboresPizza.getQtdeSabores();
+			return TiposBebidas.getQtdeTipos();
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return SaboresPizza.values()[position].getNome();
+			return TiposBebidas.values()[position].getNome();
 		}
 	}
 
@@ -189,7 +182,7 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
-		public static final String ARG_SECTION_NUMBER = "idx_pizza_selecionada";
+		public static final String ARG_SECTION_NUMBER = "idx_bebida_selecionada";
 
 		public DummySectionFragment() {
 		}
@@ -197,12 +190,12 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 		{
-			View rootView = inflater.inflate(R.layout.fragment_escolha_pizza_dummy, container, false);
+			View rootView = inflater.inflate(R.layout.fragment_escolha_bebida_dummy, container, false);
 			
-			ImageView imgSaborPizza = (ImageView) rootView.findViewById(R.id.imgSaborPizza);
-			TextView txtDescricaoPizza = (TextView) rootView.findViewById(R.id.txtDescricaoPizza);
-			imgSaborPizza.setImageResource(getResources().getIdentifier(String.format("pizza%d", getArguments().getInt(ARG_SECTION_NUMBER)), "drawable", "com.example.pizzadelivery"));
-			txtDescricaoPizza.setText(SaboresPizza.values()[getArguments().getInt(ARG_SECTION_NUMBER) - 1].getDescricao());
+			ImageView imgTipoBebida = (ImageView) rootView.findViewById(R.id.imgTipoBebida);
+			TextView txtDescricaoBebida = (TextView) rootView.findViewById(R.id.txtDescricaoBebida);
+			imgTipoBebida.setImageResource(getResources().getIdentifier(String.format("bebida%d", getArguments().getInt(ARG_SECTION_NUMBER)), "drawable", "com.example.pizzadelivery"));
+			txtDescricaoBebida.setText(TiposBebidas.values()[getArguments().getInt(ARG_SECTION_NUMBER) - 1].getDescricao());
 			
 			return rootView;
 		}

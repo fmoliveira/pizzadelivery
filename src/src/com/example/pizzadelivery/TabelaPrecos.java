@@ -12,6 +12,11 @@ public class TabelaPrecos {
 		60, 61, 62, 63, 64, 65
 	};
 	
+	public static double []mPrecosBebidas =
+	{
+		5, 5, 4.5, 4.5, 6.3, 6.2
+	};
+	
 	public static double getValorUnitario(int tipo, int id, int tamanho)
 	{
 		TiposPedido tp = TiposPedido.values()[tipo];
@@ -28,6 +33,10 @@ public class TabelaPrecos {
 			{
 				return mPrecosPizzasGigantes[id];
 			}
+		}
+		else if (tp == TiposPedido.Bebida)
+		{
+			return mPrecosBebidas[id];
 		}
 		
 		return 0;
