@@ -139,6 +139,8 @@ public class EscolhaPizzaActivity extends FragmentActivity {
 			case R.id.mnMeuPedido:
 				Intent k = new Intent(this, PedidoActivity.class);
 				startActivity(k);
+				PedidoActivity.setUltimaTela(TiposPedido.Pizza);
+				this.finish();
 				break;
 				
 			default:

@@ -70,6 +70,58 @@ public final class Pedido {
 			mMeuPedido.add(item);
 		}
 	}
+
+	public static void alterarItem(ItemPedido ch, int quantidade)
+	{
+		int i;
+		ItemPedido item;
+		
+		if (mMeuPedido != null)
+		{
+			for (i = 0; i < mMeuPedido.size(); i++)
+			{
+				item = mMeuPedido.get(i);
+				
+				if (item.getTipo() == ch.getTipo())
+				{
+					if (item.getId() == ch.getId())
+					{
+						if (item.getTamanho() == ch.getTamanho())
+						{
+							item.setQuantidade(quantidade);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	public static void removerItem(ItemPedido rm)
+	{
+		int i;
+		ItemPedido item;
+		
+		if (mMeuPedido != null)
+		{
+			for (i = 0; i < mMeuPedido.size(); i++)
+			{
+				item = mMeuPedido.get(i);
+				
+				if (item.getTipo() == rm.getTipo())
+				{
+					if (item.getId() == rm.getId())
+					{
+						if (item.getTamanho() == rm.getTamanho())
+						{
+							mMeuPedido.remove(i);
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
 	
 	public static void resetarPedido()
 	{
