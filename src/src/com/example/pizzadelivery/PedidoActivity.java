@@ -101,7 +101,9 @@ public class PedidoActivity extends Activity {
 	
 	private void Checkout()
 	{
-		//
+		Intent k = new Intent(this, PagamentoActivity.class);
+		startActivity(k);
+		this.finish();
 	}
 
 	@Override
