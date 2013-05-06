@@ -22,15 +22,20 @@ public final class R {
     }
     public static final class drawable {
         public static final int bebida1=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int ic_meu_pedido=0x7f020002;
-        public static final int mariopizzaiolo=0x7f020003;
-        public static final int pizza1=0x7f020004;
-        public static final int pizza2=0x7f020005;
-        public static final int pizza3=0x7f020006;
-        public static final int pizza4=0x7f020007;
-        public static final int pizza5=0x7f020008;
-        public static final int pizza6=0x7f020009;
+        public static final int bebida2=0x7f020001;
+        public static final int bebida3=0x7f020002;
+        public static final int bebida4=0x7f020003;
+        public static final int bebida5=0x7f020004;
+        public static final int bebida6=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int ic_meu_pedido=0x7f020007;
+        public static final int mariopizzaiolo=0x7f020008;
+        public static final int pizza1=0x7f020009;
+        public static final int pizza2=0x7f02000a;
+        public static final int pizza3=0x7f02000b;
+        public static final int pizza4=0x7f02000c;
+        public static final int pizza5=0x7f02000d;
+        public static final int pizza6=0x7f02000e;
     }
     public static final class id {
         public static final int btnAdicionarBebida=0x7f080003;
@@ -42,7 +47,6 @@ public final class R {
         public static final int btnMaisBebida=0x7f080022;
         public static final int btnMaisPizza=0x7f080021;
         public static final int btnSair=0x7f080026;
-        public static final int editText1=0x7f080018;
         public static final int imgLogotipo=0x7f080024;
         public static final int imgSaborPizza=0x7f080029;
         public static final int imgTipoBebida=0x7f080027;
@@ -53,17 +57,23 @@ public final class R {
         public static final int pagerTitleBebidas=0x7f080001;
         public static final int pagerTitlePizzas=0x7f080006;
         public static final int radFormaPagamento=0x7f08000f;
+        public static final int radPagtoDinheiro=0x7f080010;
+        public static final int radPagtoMaster=0x7f080011;
+        public static final int radPagtoVisa=0x7f080012;
         public static final int radTamanhoPizza=0x7f080008;
-        public static final int radio0=0x7f080010;
-        public static final int radio1=0x7f080011;
-        public static final int radio2=0x7f080012;
         public static final int tam_pizza_gigante=0x7f08000a;
         public static final int tam_pizza_grande=0x7f080009;
-        public static final int textView1=0x7f080015;
+        public static final int txtChkTrocoPara=0x7f080016;
+        public static final int txtChkTrocoParaMoeda=0x7f080017;
         public static final int txtChkValorTotal=0x7f080013;
+        public static final int txtChkValorTroco=0x7f080019;
+        public static final int txtChkValorTrocoMoeda=0x7f08001a;
         public static final int txtChkVlrTotMoeda=0x7f080014;
         public static final int txtDescricaoBebida=0x7f080028;
         public static final int txtDescricaoPizza=0x7f08002a;
+        public static final int txtEdtTrocoPara=0x7f080018;
+        public static final int txtEdtValorTotal=0x7f080015;
+        public static final int txtEdtValorTroco=0x7f08001b;
         public static final int txtFormaPagamento=0x7f08000e;
         public static final int txtItemPedido=0x7f08002c;
         public static final int txtNenhumItem=0x7f08001d;
@@ -76,11 +86,6 @@ public final class R {
         public static final int txtTamanho=0x7f080007;
         public static final int txtTotalPedido=0x7f08001e;
         public static final int txtValorTotal=0x7f080020;
-        public static final int txtaaa=0x7f080016;
-        public static final int txtasd=0x7f080019;
-        public static final int txtbbb=0x7f080017;
-        public static final int txtdfd=0x7f08001a;
-        public static final int txtvc=0x7f08001b;
     }
     public static final class layout {
         public static final int activity_escolha_bebida=0x7f030000;

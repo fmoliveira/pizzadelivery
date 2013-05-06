@@ -2,7 +2,7 @@ package com.example.pizzadelivery;
 
 public enum TiposBebidas {
 
-	Pepsi(0), PepsiZero(1), Guarana(2), GuaranaZero(3), H2O(4), IceTea(5);
+	Pepsi(0), PepsiLight(1), Guarana(2), GuaranaZero(3), H2O(4), IceTea(5);
 	
 	public static final int getQtdeTipos()
 	{
@@ -35,8 +35,8 @@ public enum TiposBebidas {
 			case Pepsi:
 				return "Pepsi";
 				
-			case PepsiZero:
-				return "Pepsi Zero";
+			case PepsiLight:
+				return "Pepsi Light";
 				
 			case Guarana:
 				return "Guaraná";
@@ -64,8 +64,8 @@ public enum TiposBebidas {
 			case Pepsi:
 				return "Pepsi 2L";
 				
-			case PepsiZero:
-				return "Pepsi Zero 2L";
+			case PepsiLight:
+				return "Pepsi Light 2L";
 				
 			case Guarana:
 				return "Guaraná Antarctica 2L";

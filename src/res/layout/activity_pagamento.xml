@@ -19,20 +19,20 @@
         android:layout_gravity="center_horizontal" >
 
         <RadioButton
-            android:id="@+id/radio0"
+            android:id="@+id/radPagtoDinheiro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
             android:text="Dinheiro" />
 
         <RadioButton
-            android:id="@+id/radio1"
+            android:id="@+id/radPagtoMaster"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Master Card Crédito/Débito" />
 
         <RadioButton
-            android:id="@+id/radio2"
+            android:id="@+id/radPagtoVisa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Visa Crédito/Débito" />
@@ -62,7 +62,7 @@
             android:textAppearance="?android:attr/textAppearance" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/txtEdtValorTotal"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -77,7 +77,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/txtaaa"
+            android:id="@+id/txtChkTrocoPara"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -85,7 +85,7 @@
             android:textAppearance="?android:attr/textAppearance" />
 
         <TextView
-            android:id="@+id/txtbbb"
+            android:id="@+id/txtChkTrocoParaMoeda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -95,10 +95,11 @@
             android:textAppearance="?android:attr/textAppearance" />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/txtEdtTrocoPara"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:gravity="right"
             android:inputType="numberDecimal" >
 
             <requestFocus />
@@ -112,7 +113,7 @@
         android:layout_marginTop="10dp" >
 
         <TextView
-            android:id="@+id/txtasd"
+            android:id="@+id/txtChkValorTroco"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -120,7 +121,7 @@
             android:textAppearance="?android:attr/textAppearance" />
 
         <TextView
-            android:id="@+id/txtdfd"
+            android:id="@+id/txtChkValorTrocoMoeda"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -130,7 +131,7 @@
             android:textAppearance="?android:attr/textAppearance" />
 
         <TextView
-            android:id="@+id/txtvc"
+            android:id="@+id/txtEdtValorTroco"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:gravity="right"

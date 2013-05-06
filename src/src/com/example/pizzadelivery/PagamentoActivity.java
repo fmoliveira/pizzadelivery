@@ -3,6 +3,7 @@ package com.example.pizzadelivery;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.TextView;
 
 public class PagamentoActivity extends Activity {
 
@@ -10,6 +11,9 @@ public class PagamentoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pagamento);
+		
+		TextView txtEdtValorTotal = (TextView) findViewById(R.id.txtEdtValorTotal);
+		txtEdtValorTotal.setText(String.format("%.2f", Pedido.getValorTotal()));
 	}
 
 	@Override
