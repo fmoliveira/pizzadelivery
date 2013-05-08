@@ -79,9 +79,14 @@ public class ItemPedido {
 		return s;
 	}
 	
+	@Override
 	public String toString()
 	{
-		return getDescricao();
+		return String.format("ItemPedido [Id=%d, Tipo=%d, Tamanho=%d, Quantidade=%d]", this.getId(), this.getTipo(), this.getTamanho(), this.getQuantidade());
+	}
+
+	public Integer getKey() {
+		return ((this.getId() + 1) * (this.getTipo() + 1) * (this.getTamanho() + 1));
 	}
 	
 }
