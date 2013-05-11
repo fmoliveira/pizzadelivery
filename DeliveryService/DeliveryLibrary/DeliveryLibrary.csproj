@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Endereco.cs" />
     <Compile Include="ItemPedido.cs" />
     <Compile Include="Pedido.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

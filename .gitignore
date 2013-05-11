@@ -2,3 +2,6 @@
 /DeliveryService/DeliveryManager/obj/Debug
 /DeliveryService/DeliveryLibrary/obj/Debug
 /DeliveryService/DeliveryService/obj/Debug
+/DeliveryService/DeliveryLibrary/obj/Release
+/DeliveryService/DeliveryManager/obj/Release
+/DeliveryService/DeliveryService/obj/Release

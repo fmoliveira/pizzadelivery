@@ -1,9 +1,11 @@
-﻿using System;
+﻿using HttpUtils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +14,8 @@ namespace DeliveryManager
 {
     public partial class frmMain : Form
     {
+        private const string api = "http://localhost:63365/api/pedido";
+
         public frmMain()
         {
             InitializeComponent();
@@ -38,11 +42,13 @@ namespace DeliveryManager
             lstPedidos.Columns.Add("Cliente", 150);
             lstPedidos.Columns.Add("Bairro", 150);
             lstPedidos.Columns.Add("Valor Total", 150);
+        }
 
-            /* Cria os grupos */
-            lstPedidos.Groups.Add("NovosPedidos", "Novos Pedidos");
-            lstPedidos.Groups.Add("EmProcessamento", "Em Processamento");
-            lstPedidos.Groups.Add("Finalizados", "Finalizados");
+        private void ListarPedidos()
+        {
+            string endPoint = @"http:\\myRestService.com\api\";
+            var client = new RestClient(endPoint);
+            var json = client.MakeRequest();
         }
     }
 }

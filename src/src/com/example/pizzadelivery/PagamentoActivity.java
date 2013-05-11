@@ -47,9 +47,6 @@ public class PagamentoActivity extends Activity {
 	
 	private void PostarPedido()
 	{	
-		Gson a = new Gson();
-		String b = a.toJson(Pedido.getMeuPedido());
-		
 		Thread t = new Thread() {
 
             public void run() {
@@ -61,8 +58,8 @@ public class PagamentoActivity extends Activity {
         		String json = gson.toJson(Pedido.getMeuPedido());
 
                 try {
-                    HttpPost post = new HttpPost("http://localhost:12345/PizzaService/NovoPedido");
-                    StringEntity se = new StringEntity( json );  
+                    HttpPost post = new HttpPost("http://www.fmoliveira.com.br/PizzaService/api/pedido");
+                    StringEntity se = new StringEntity( json );
                     se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
                     post.setEntity(se);
                     response = client.execute(post);
@@ -75,8 +72,8 @@ public class PagamentoActivity extends Activity {
                     Toast.makeText(getApplicationContext(), "Pedido enviado com sucesso!", Toast.LENGTH_SHORT);
 
                 } catch(Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "Erro ao postar pedido!", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
+//                    Toast.makeText(getApplicationContext(), "Erro ao postar pedido!", Toast.LENGTH_SHORT);
                 }
 
                 Looper.loop(); //Loop in the message queue
