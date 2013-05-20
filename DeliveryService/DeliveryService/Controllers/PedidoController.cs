@@ -16,8 +16,11 @@ namespace DeliveryService.Controllers
         private string connstr = "Data Source=localhost; User Id=sa; Password=eugenia; Initial Catalog=PizzaDelivery;";
 
         // GET api/pedido
-        public IEnumerable<Pedido> Get()
+        public IEnumerable<Pedido> Get(int id)
         {
+            DateTime min = new DateTime(1970, 1, 1, 0, 0, 0);
+            min = min.AddSeconds(id);
+
             SqlConnection conn = new SqlConnection(connstr);
             SqlCommand cmd = null;
             SqlDataReader reader = null;
@@ -30,12 +33,13 @@ namespace DeliveryService.Controllers
 
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT PedidoId, Data, Espera, NomeCliente, Endereco, Bairro FROM Pedidos;";
+                cmd.CommandText = "SELECT PedidoId, Data, Espera, NomeCliente, Endereco, Bairro FROM Pedidos WHERE Data > @Data;";
+                cmd.Parameters.AddWithValue("@Data", min);
                 reader = cmd.ExecuteReader();
 
                 if (reader.HasRows)
                 {
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         Pedido p = new Pedido();
                         p.PedidoId = (int)reader["PedidoId"];
@@ -63,12 +67,6 @@ namespace DeliveryService.Controllers
             }
 
             return lista.ToArray();
-        }
-
-        // GET api/pedido/5
-        public string Get(int id)
-        {
-            return "value";
         }
 
         // POST api/pedido

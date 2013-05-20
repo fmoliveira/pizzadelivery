@@ -5,11 +5,31 @@ import java.util.List;
 
 public final class Pedido {
 	
-	private static List<ItemPedido> mMeuPedido;
+	public String NomeCliente = "";
+
+    public String Telefone = "";
+
+    public String Endereco = "";
+
+    public String Bairro  = "";
+	
+	public List<ItemPedido> ItensPedido = null;
+	
+	private static Pedido mMeuPedido = null; 
+	
+	public static Pedido getInstancia()
+	{
+		if (mMeuPedido == null)
+		{
+			mMeuPedido = new Pedido();
+		}
+		
+		return mMeuPedido;
+	}
 	
 	public static List<ItemPedido> getMeuPedido()
 	{
-		return mMeuPedido;
+		return getInstancia().ItensPedido;
 	}
 	
 	private static double mValorTotal = 0.0;
@@ -21,7 +41,7 @@ public final class Pedido {
 	
 	private Pedido()
 	{
-		//
+		this.ItensPedido = new ArrayList<ItemPedido>();
 	}
 	
 	public static void addItem(int tipo, int id, int tamanho)
@@ -29,11 +49,11 @@ public final class Pedido {
 		int i;
 		ItemPedido item = null;
 		
-		if (mMeuPedido != null)
+		if (getMeuPedido() != null)
 		{
-			for (i = 0; i < mMeuPedido.size(); i++)
+			for (i = 0; i < getMeuPedido().size(); i++)
 			{
-				item = mMeuPedido.get(i);
+				item = getMeuPedido().get(i);
 				
 				if (item.getTipo() == tipo)
 				{
@@ -67,7 +87,7 @@ public final class Pedido {
 		{
 			item.setQuantidade(1);
 			mValorTotal += item.getValorUnitario();
-			mMeuPedido.add(item);
+			getMeuPedido().add(item);
 		}
 	}
 
@@ -76,11 +96,11 @@ public final class Pedido {
 		int i;
 		ItemPedido item;
 		
-		if (mMeuPedido != null)
+		if (getMeuPedido() != null)
 		{
-			for (i = 0; i < mMeuPedido.size(); i++)
+			for (i = 0; i < getMeuPedido().size(); i++)
 			{
-				item = mMeuPedido.get(i);
+				item = getMeuPedido().get(i);
 				
 				if (item.getTipo() == ch.getTipo())
 				{
@@ -102,11 +122,11 @@ public final class Pedido {
 		int i;
 		ItemPedido item;
 		
-		if (mMeuPedido != null)
+		if (getMeuPedido() != null)
 		{
-			for (i = 0; i < mMeuPedido.size(); i++)
+			for (i = 0; i < getMeuPedido().size(); i++)
 			{
-				item = mMeuPedido.get(i);
+				item = getMeuPedido().get(i);
 				
 				if (item.getTipo() == rm.getTipo())
 				{
@@ -114,7 +134,7 @@ public final class Pedido {
 					{
 						if (item.getTamanho() == rm.getTamanho())
 						{
-							mMeuPedido.remove(i);
+							getMeuPedido().remove(i);
 							return;
 						}
 					}
@@ -125,14 +145,7 @@ public final class Pedido {
 	
 	public static void resetarPedido()
 	{
-		if (mMeuPedido == null)
-		{
-			mMeuPedido = new ArrayList<ItemPedido>();
-		}
-		else
-		{
-			mMeuPedido.clear();
-		}
+		getMeuPedido().clear();
 		mValorTotal = 0.0;
 	}
 	

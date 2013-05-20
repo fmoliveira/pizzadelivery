@@ -13,5 +13,6 @@
     <string name="title_activity_pagamento">PagamentoActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_editar_item">EditarItemActivity</string>
+    <string name="title_activity_endereco">EnderecoActivity</string>
 
 </resources>

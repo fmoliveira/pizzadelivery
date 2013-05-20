@@ -24,21 +24,21 @@ namespace HttpUtils
         {
             EndPoint = "";
             Method = HttpVerb.GET;
-            ContentType = "text/xml";
+            ContentType = "application/json";
             PostData = "";
         }
         public RestClient(string endpoint)
         {
             EndPoint = endpoint;
             Method = HttpVerb.GET;
-            ContentType = "text/xml";
+            ContentType = "application/json";
             PostData = "";
         }
         public RestClient(string endpoint, HttpVerb method)
         {
             EndPoint = endpoint;
             Method = method;
-            ContentType = "text/xml";
+            ContentType = "application/json";
             PostData = "";
         }
 
@@ -46,7 +46,7 @@ namespace HttpUtils
         {
             EndPoint = endpoint;
             Method = method;
-            ContentType = "text/xml";
+            ContentType = "application/json";
             PostData = postData;
         }
 
