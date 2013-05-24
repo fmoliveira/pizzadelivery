@@ -70,13 +70,9 @@ namespace DeliveryService.Controllers
         }
 
         // POST api/pedido
-        public void Post([FromBody]string value)
+        public void Post(Pedido pedido)
         {
-            // {"NomeCliente":"John Doe","Data":"2013-05-10 20:40:53","Telefone":"32540083","Endereco":"Rua Dr Sales de Oliveira 1661","Bairro":"Vila Industrial",ItensPedido:[{"Id":0,"Quantidade":1,"Tamanho":0,"Tipo":0},{"Id":0,"Quantidade":1,"Tamanho":0,"Tipo":1}]}
-
             JavaScriptSerializer json = new JavaScriptSerializer();
-            Pedido pedido = json.Deserialize<Pedido>(value);
-
             SqlConnection conn = new SqlConnection(connstr);
             SqlTransaction tran = null;
             SqlCommand cmd = null;
@@ -89,7 +85,7 @@ namespace DeliveryService.Controllers
                 cmd.CommandType = CommandType.Text;
                 cmd.Transaction = tran;
 
-                cmd.CommandText = string.Format("INSERT INTO Pedidos (Data, NomeCliente, Endereco, Bairro) VALUES ('{0}', '{1}', '{2}', '{3}');", pedido.Data, pedido.NomeCliente, pedido.Endereco, pedido.Bairro);
+                cmd.CommandText = string.Format("INSERT INTO Pedidos (Data, NomeCliente, Endereco, Bairro) VALUES ('{0:yyyy-MM-dd HH:mm:ss}', '{1}', '{2}', '{3}');", DateTime.Now, pedido.NomeCliente, pedido.Endereco, pedido.Bairro);
                 cmd.ExecuteNonQuery();
 
                 object o;

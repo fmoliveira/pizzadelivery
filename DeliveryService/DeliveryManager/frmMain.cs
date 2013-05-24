@@ -62,7 +62,7 @@ namespace DeliveryManager
 
         private void ListarPedidos()
         {
-            string endPoint = string.Format("http://localhost:63365/api/pedido/{0}", mUltimoPedido);
+            string endPoint = string.Format("http://localhost/DeliveryService/api/pedido/{0}", mUltimoPedido);
             var client = new RestClient(endPoint);
             string json = client.MakeRequest();
 

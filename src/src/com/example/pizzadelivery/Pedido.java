@@ -148,5 +148,10 @@ public final class Pedido {
 		getMeuPedido().clear();
 		mValorTotal = 0.0;
 	}
-	
+
+	@Override
+	public String toString()
+	{
+		return String.format("Pedido [NomeCliente=%s, Telefone=%s, Endereco=%s, Bairro=%s, ItensPedido=%s]", this.NomeCliente, this.Telefone, this.Endereco, this.Bairro, this.ItensPedido);
+	}
 }

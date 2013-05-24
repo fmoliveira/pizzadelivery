@@ -1,18 +1,26 @@
 package com.example.pizzadelivery;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
+import org.json.JSONObject;
 
 import android.opengl.Visibility;
 import android.os.Bundle;
@@ -127,27 +135,22 @@ public class PagamentoActivity extends Activity {
             public void run()
             {
                 Looper.prepare();
-                HttpClient client = new DefaultHttpClient();
-                HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000); //Timeout Limit
-                HttpResponse response;
         		Gson gson = new Gson();
-        		String json = gson.toJson(Pedido.getMeuPedido());
+        		String json = gson.toJson(Pedido.getInstancia());
 
                 try
                 {
-                    HttpPost post = new HttpPost("http://www.fmoliveira.com.br/PizzaService/api/pedido");
-                    StringEntity se = new StringEntity( json );
-                    se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                    post.setEntity(se);
-                    response = client.execute(post);
-
-                    /*Checking response */
-                    if (response != null)
-                    {
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                    }
+                    DefaultHttpClient httpclient = new DefaultHttpClient();
+                    HttpPost httpost = new HttpPost("http://192.168.1.101/DeliveryService/api/pedido");
+                    StringEntity se = new StringEntity(json);
+                    httpost.setEntity(se);
+                    httpost.setHeader("Accept", "application/json");
+                    httpost.setHeader("Content-type", "application/json");
+                    ResponseHandler responseHandler = new BasicResponseHandler();
+                    httpclient.execute(httpost, responseHandler);
                     
                     Toast.makeText(getApplicationContext(), "Pedido realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                    Looper.myLooper().quit();
 
                 }
                 catch(Exception e)
@@ -155,7 +158,7 @@ public class PagamentoActivity extends Activity {
                     Toast.makeText(getApplicationContext(), "Falha ao postar pedido!", Toast.LENGTH_SHORT).show();
                 }
 
-                Looper.loop(); //Loop in the message queue
+                Looper.loop();
             }
         };
 
