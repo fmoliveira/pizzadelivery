@@ -68,20 +68,16 @@ public class PedidoActivity extends Activity {
 	{
 		Intent k = null;
 		
-		if (mUltimaTela == TiposPedido.Pizza)
-		{
-			k = new Intent(this, EscolhaPizzaActivity.class);
-		}
-		else if (mUltimaTela == TiposPedido.Bebida)
+		if (mUltimaTela == TiposPedido.Bebida)
 		{
 			k = new Intent(this, EscolhaBebidaActivity.class);
 		}
-		
-		if (k != null)
+		else
 		{
-			startActivity(k);
+			k = new Intent(this, EscolhaPizzaActivity.class);
 		}
 		
+		startActivity(k);
 		this.finish();
 	}
 	
@@ -101,9 +97,16 @@ public class PedidoActivity extends Activity {
 	
 	private void Checkout()
 	{
-		Intent k = new Intent(this, EnderecoActivity.class);
-		startActivity(k);
-		this.finish();
+		if (Pedido.getValorTotal() == 0.0)
+		{
+			Toast.makeText(getApplicationContext(), "Adicione itens ao pedido antes de fechar!", Toast.LENGTH_SHORT).show();
+		}
+		else
+		{		
+			Intent k = new Intent(this, EnderecoActivity.class);
+			startActivity(k);
+			this.finish();
+		}
 	}
 
 	@Override

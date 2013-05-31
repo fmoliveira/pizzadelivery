@@ -12,6 +12,10 @@ public final class Pedido {
     public String Endereco = "";
 
     public String Bairro  = "";
+    
+    public int FormaPagto = 0;
+    
+    public double TrocoPara = 0;
 	
 	public List<ItemPedido> ItensPedido = null;
 	
@@ -152,6 +156,6 @@ public final class Pedido {
 	@Override
 	public String toString()
 	{
-		return String.format("Pedido [NomeCliente=%s, Telefone=%s, Endereco=%s, Bairro=%s, ItensPedido=%s]", this.NomeCliente, this.Telefone, this.Endereco, this.Bairro, this.ItensPedido);
+		return String.format("Pedido [NomeCliente=%s, Telefone=%s, Endereco=%s, Bairro=%s, FormaPagto=%d, TrocoPara=%f, ItensPedido=%s]", this.NomeCliente, this.Telefone, this.Endereco, this.Bairro, this.FormaPagto, this.TrocoPara, this.ItensPedido);
 	}
 }

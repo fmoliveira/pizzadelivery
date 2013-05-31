@@ -63,10 +63,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lstPedidos.FullRowSelect = true;
             this.lstPedidos.Location = new System.Drawing.Point(12, 99);
+            this.lstPedidos.MultiSelect = false;
             this.lstPedidos.Name = "lstPedidos";
             this.lstPedidos.Size = new System.Drawing.Size(760, 450);
             this.lstPedidos.TabIndex = 2;
             this.lstPedidos.UseCompatibleStateImageBehavior = false;
+            this.lstPedidos.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstPedidos_MouseDoubleClick);
             // 
             // frmMain
             // 

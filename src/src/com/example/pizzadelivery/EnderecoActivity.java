@@ -26,6 +26,14 @@ public class EnderecoActivity extends Activity {
 			}
 		});
 	}
+
+	@Override
+	public void onBackPressed()
+	{
+		Intent k = new Intent(this, PedidoActivity.class);		
+		startActivity(k);
+		this.finish();
+	}
 	
 	private void ConfirmarEndereco()
 	{
@@ -67,7 +75,6 @@ public class EnderecoActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.endereco, menu);
 		return true;
 	}
 

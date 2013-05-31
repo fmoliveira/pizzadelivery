@@ -6,6 +6,7 @@ public class ItemPedido {
 	protected int Tipo = 0;
 	protected int Tamanho = 0;
 	protected int Quantidade = 0;
+	protected double ValorUnitario = 0.0;
 	
 	protected ItemPedido()
 	{
@@ -40,7 +41,11 @@ public class ItemPedido {
 	
 	public double getValorUnitario()
 	{
-		return TabelaPrecos.getValorUnitario(this.getTipo(), this.getId(), this.getTamanho());
+		if (ValorUnitario == 0.0)
+		{
+			this.ValorUnitario = TabelaPrecos.getValorUnitario(this.getTipo(), this.getId(), this.getTamanho());
+		}
+		return this.ValorUnitario;
 	}
 	
 	public void setQuantidade(int quantidade)
@@ -82,7 +87,7 @@ public class ItemPedido {
 	@Override
 	public String toString()
 	{
-		return String.format("ItemPedido [Id=%d, Tipo=%d, Tamanho=%d, Quantidade=%d]", this.getId(), this.getTipo(), this.getTamanho(), this.getQuantidade());
+		return String.format("ItemPedido [Id=%d, Tipo=%d, Tamanho=%d, Quantidade=%d, ValorUnitario=%f]", this.getId(), this.getTipo(), this.getTamanho(), this.getQuantidade(), this.getValorUnitario());
 	}
 
 	public Integer getKey() {

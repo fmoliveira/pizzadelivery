@@ -34,9 +34,10 @@
         </activity>
         <activity android:name="com.example.pizzadelivery.PagamentoActivity" >
         </activity>
+        <activity android:name="com.example.pizzadelivery.EnderecoActivity" >
+        </activity>
         <activity
-            android:name="com.example.pizzadelivery.EnderecoActivity"
-            android:label="@string/title_activity_endereco" >
+            android:name="com.example.pizzadelivery.PedidoRealizadoActivity">
         </activity>
     </application>
 

@@ -22,6 +22,12 @@ namespace DeliveryLibrary
 
         public string Bairro { get; set; }
 
+        public int FormaPagto { get; set; }
+
+        public double TrocoPara { get; set; }
+
+        public double ValorTotal { get; set; }
+
         public List<ItemPedido> ItensPedido { get; set; }
     }
 }

@@ -15,5 +15,9 @@ namespace DeliveryLibrary
         public int Tamanho { get; set; }
 
         public int Quantidade { get; set; }
+
+        public double ValorUnitario { get; set; }
+
+        public double SubTotal { get; set; }
     }
 }

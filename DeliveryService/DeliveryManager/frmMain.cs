@@ -94,12 +94,26 @@ namespace DeliveryManager
                 item.SubItems.Add(string.Format("{0} min", p.Espera));
                 item.SubItems.Add(p.NomeCliente);
                 item.SubItems.Add(p.Bairro);
-                item.SubItems.Add(string.Format("R$ {0:#,##0.00}", 0));
+                item.SubItems.Add(string.Format("R$ {0:#,##0.00}", p.ValorTotal));
+                item.Tag = p;
                 lstPedidos.Items.Add(item);
 
                 if (unix > mUltimoPedido)
                 {
                     mUltimoPedido = unix;
+                }
+            }
+        }
+
+        private void lstPedidos_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lstPedidos.SelectedItems.Count == 1)
+            {
+                if (lstPedidos.SelectedItems[0].Tag is Pedido)
+                {
+                    Pedido p = (lstPedidos.SelectedItems[0].Tag as Pedido);
+                    frmDetalhePedido detalhe = new frmDetalhePedido(p);
+                    detalhe.ShowDialog();
                 }
             }
         }

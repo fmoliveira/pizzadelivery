@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -26,6 +27,7 @@ import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Looper;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -45,6 +47,7 @@ public class PagamentoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pagamento);
+		Pedido.getInstancia().FormaPagto = 1;
 		
 		RadioGroup radFormaPagamento = (RadioGroup) findViewById(R.id.radFormaPagamento);
 		radFormaPagamento.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -80,26 +83,50 @@ public class PagamentoActivity extends Activity {
 			}
 		});
 	}
+
+	@Override
+	public void onBackPressed()
+	{
+		Intent k = new Intent(this, EnderecoActivity.class);
+		startActivity(k);
+		this.finish();
+	}
 	
 	private boolean trocoValido = false;
 	
 	private void AlterarFormaPagamento()
 	{
 		RadioButton radPagtoDinheiro = (RadioButton) findViewById(R.id.radPagtoDinheiro);
+		RadioButton radPagtoMaster = (RadioButton) findViewById(R.id.radPagtoMaster);
+		RadioButton radPagtoVisa = (RadioButton) findViewById(R.id.radPagtoVisa);
 		View grpTrocoPara = findViewById(R.id.grpTrocoPara);
 		View grpValorTroco = findViewById(R.id.grpValorTroco);
 
 		grpTrocoPara.setVisibility(radPagtoDinheiro.isChecked() ? View.VISIBLE : View.GONE);
 		grpValorTroco.setVisibility(radPagtoDinheiro.isChecked() ? View.VISIBLE : View.GONE);
 		
+		int formaPagto = 0;
+		
 		if (radPagtoDinheiro.isChecked())
 		{
+			formaPagto = 1;
 			CalcularTroco();
 		}
 		else
 		{
+			if (radPagtoMaster.isChecked())
+			{
+				formaPagto = 2;
+			}
+			else
+			{
+				formaPagto = 3;
+			}
+			Pedido.getInstancia().TrocoPara = 0.0;
 			trocoValido = true;
 		}
+		
+		Pedido.getInstancia().FormaPagto = formaPagto;
 	}
 	
 	private void CalcularTroco()
@@ -111,6 +138,7 @@ public class PagamentoActivity extends Activity {
 			TextView txtEdtValorTroco = (TextView) findViewById(R.id.txtEdtValorTroco);
 			
 			trocoPara = Double.parseDouble(txtEdtTrocoPara.getText().toString());
+			Pedido.getInstancia().TrocoPara = trocoPara;
 			valorTroco = trocoPara - valorTotal;
 			
 			txtEdtValorTroco.setText(String.format("%.2f", valorTroco));
@@ -120,6 +148,23 @@ public class PagamentoActivity extends Activity {
 		{
 			trocoValido = false;
 		}
+	}
+	
+	public void showToast(final String toast)
+	{
+	    runOnUiThread(new Runnable() {
+	        public void run()
+	        {
+	            Toast.makeText(PagamentoActivity.this, toast, Toast.LENGTH_SHORT).show();
+	        }
+	    });
+	}
+	
+	public void sucesso()
+	{
+    	Intent k = new Intent(this, PedidoRealizadoActivity.class);
+    	startActivity(k);
+    	this.finish();
 	}
 	
 	private void PostarPedido()
@@ -134,30 +179,37 @@ public class PagamentoActivity extends Activity {
 		{
             public void run()
             {
-                Looper.prepare();
+            	Looper.prepare();
         		Gson gson = new Gson();
         		String json = gson.toJson(Pedido.getInstancia());
 
                 try
                 {
-                    DefaultHttpClient httpclient = new DefaultHttpClient();
-                    HttpPost httpost = new HttpPost("http://192.168.1.101/DeliveryService/api/pedido");
+                    DefaultHttpClient client = new DefaultHttpClient();
+                    HttpPost post = new HttpPost("http://192.168.1.101/DeliveryService/api/pedido");
                     StringEntity se = new StringEntity(json);
-                    httpost.setEntity(se);
-                    httpost.setHeader("Accept", "application/json");
-                    httpost.setHeader("Content-type", "application/json");
-                    ResponseHandler responseHandler = new BasicResponseHandler();
-                    httpclient.execute(httpost, responseHandler);
+                    post.setEntity(se);
+                    post.setHeader("Accept", "application/json");
+                    post.setHeader("Content-type", "application/json");
+                    HttpResponse resp = client.execute(post);
                     
-                    Toast.makeText(getApplicationContext(), "Pedido realizado com sucesso!", Toast.LENGTH_SHORT).show();
+                    if (resp.getStatusLine().getStatusCode() == HttpStatus.SC_CREATED)
+                    {
+                    	showToast("Pedido realizado com sucesso!");
+                    	sucesso();
+                    }
+                    else
+                    {
+                    	showToast("Erro ao postar pedido!");
+                    }
+                    
                     Looper.myLooper().quit();
-
                 }
                 catch(Exception e)
                 {
-                    Toast.makeText(getApplicationContext(), "Falha ao postar pedido!", Toast.LENGTH_SHORT).show();
+                	showToast("Falha ao postar pedido!");
                 }
-
+                
                 Looper.loop();
             }
         };

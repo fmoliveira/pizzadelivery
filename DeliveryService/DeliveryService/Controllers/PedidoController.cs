@@ -29,11 +29,13 @@ namespace DeliveryService.Controllers
 
             try
             {
+                Pedido p = null;
+                int ped = 0;
                 conn.Open();
 
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT PedidoId, Data, Espera, NomeCliente, Endereco, Bairro FROM Pedidos WHERE Data > @Data;";
+                cmd.CommandText = "SELECT p.PedidoId, p.Data, p.Espera, p.NomeCliente, p.Endereco, p.Bairro, p.FormaPagto, p.TrocoPara, i.Id, i.Tipo, i.Tamanho, i.Quantidade, i.ValorUnitario FROM Pedidos AS p INNER JOIN PedidosItens AS i ON i.PedidoId = p.PedidoId WHERE p.Data > @Data ORDER BY p.PedidoId, i.Indice;";
                 cmd.Parameters.AddWithValue("@Data", min);
                 reader = cmd.ExecuteReader();
 
@@ -41,13 +43,41 @@ namespace DeliveryService.Controllers
                 {
                     while (reader.Read())
                     {
-                        Pedido p = new Pedido();
-                        p.PedidoId = (int)reader["PedidoId"];
-                        p.Data = (DateTime)reader["Data"];
-                        p.Espera = (int)reader["Espera"];
-                        p.NomeCliente = reader["NomeCliente"].ToString();
-                        p.Endereco = reader["Endereco"].ToString();
-                        p.Bairro = reader["Bairro"].ToString();
+                        ped = (int)reader["PedidoId"];
+
+                        if (p == null || p.PedidoId != ped)
+                        {
+                            if (p != null)
+                            {
+                                lista.Add(p);
+                            }
+
+                            p = new Pedido();
+                            p.PedidoId = ped;
+                            p.Data = (DateTime)reader["Data"];
+                            p.Espera = 45; // (int)reader["Espera"];
+                            p.NomeCliente = reader["NomeCliente"].ToString();
+                            p.Endereco = reader["Endereco"].ToString();
+                            p.Bairro = reader["Bairro"].ToString();
+                            p.FormaPagto = (int)reader["FormaPagto"];
+                            p.TrocoPara = double.Parse((reader["TrocoPara"].ToString()));
+                            p.ValorTotal = 0.0;
+                            p.ItensPedido = new List<ItemPedido>();
+                        }
+
+                        ItemPedido item = new ItemPedido();
+                        item.Id = (int)reader["Id"];
+                        item.Tipo = (int)reader["Tipo"];
+                        item.Tamanho = (int)reader["Tamanho"];
+                        item.Quantidade = (int)reader["Quantidade"];
+                        item.ValorUnitario = double.Parse((reader["ValorUnitario"].ToString()));
+                        item.SubTotal = (item.Quantidade * item.ValorUnitario);
+                        p.ValorTotal += item.SubTotal;
+                        p.ItensPedido.Add(item);
+                    }
+
+                    if (p != null)
+                    {
                         lista.Add(p);
                     }
                 }
@@ -70,12 +100,13 @@ namespace DeliveryService.Controllers
         }
 
         // POST api/pedido
-        public void Post(Pedido pedido)
+        public HttpResponseMessage Post(Pedido pedido)
         {
             JavaScriptSerializer json = new JavaScriptSerializer();
             SqlConnection conn = new SqlConnection(connstr);
             SqlTransaction tran = null;
             SqlCommand cmd = null;
+            HttpResponseMessage msg = null;
 
             try
             {
@@ -85,7 +116,7 @@ namespace DeliveryService.Controllers
                 cmd.CommandType = CommandType.Text;
                 cmd.Transaction = tran;
 
-                cmd.CommandText = string.Format("INSERT INTO Pedidos (Data, NomeCliente, Endereco, Bairro) VALUES ('{0:yyyy-MM-dd HH:mm:ss}', '{1}', '{2}', '{3}');", DateTime.Now, pedido.NomeCliente, pedido.Endereco, pedido.Bairro);
+                cmd.CommandText = string.Format("INSERT INTO Pedidos (Data, NomeCliente, Endereco, Bairro, FormaPagto, TrocoPara, Espera) VALUES ('{0:yyyy-MM-dd HH:mm:ss}', '{1}', '{2}', '{3}', {4}, {5}, 45);", DateTime.Now, pedido.NomeCliente, pedido.Endereco, pedido.Bairro, pedido.FormaPagto, pedido.TrocoPara);
                 cmd.ExecuteNonQuery();
 
                 object o;
@@ -99,34 +130,34 @@ namespace DeliveryService.Controllers
 
                     for (int i = 0; i < pedido.ItensPedido.Count; i++)
                     {
-                        cmd.CommandText = string.Format("INSERT INTO PedidosItens (PedidoId, Indice, Id, Tipo, Tamanho, Quantidade) VALUES ({0}, {1}, {2}, {3}, {4}, {5});", id, i + 1, pedido.ItensPedido[i].Id, pedido.ItensPedido[i].Tipo, pedido.ItensPedido[i].Tamanho, pedido.ItensPedido[i].Quantidade);
+                        cmd.CommandText = string.Format("INSERT INTO PedidosItens (PedidoId, Indice, Id, Tipo, Tamanho, Quantidade, ValorUnitario) VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6});", id, i + 1, pedido.ItensPedido[i].Id, pedido.ItensPedido[i].Tipo, pedido.ItensPedido[i].Tamanho, pedido.ItensPedido[i].Quantidade, pedido.ItensPedido[i].ValorUnitario);
                         cmd.ExecuteNonQuery();
                     }
                 }
 
                 tran.Commit();
+                msg = new HttpResponseMessage(HttpStatusCode.Created);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (tran != null)
                 {
                     tran.Rollback();
                 }
+
+                msg = new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
             finally
             {
                 conn.Close();
+
+                if (msg == null)
+                {
+                    msg = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                }
             }
-        }
 
-        // PUT api/pedido/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/pedido/5
-        public void Delete(int id)
-        {
+            return msg;
         }
     }
 }
