@@ -200,14 +200,14 @@ public class PagamentoActivity extends Activity {
                     }
                     else
                     {
-                    	showToast("Erro ao postar pedido!");
+                    	showToast("Falha ao postar pedido!");
                     }
                     
                     Looper.myLooper().quit();
                 }
                 catch(Exception e)
                 {
-                	showToast("Falha ao postar pedido!");
+                	showToast("Erro ao postar pedido!");
                 }
                 
                 Looper.loop();

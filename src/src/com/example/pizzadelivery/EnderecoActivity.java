@@ -16,6 +16,17 @@ public class EnderecoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_endereco);
+
+		TextView txtNomeCliente = (TextView) findViewById(R.id.txtNomeCliente);
+		TextView txtTelefone = (TextView) findViewById(R.id.txtTelefone);
+		TextView txtEndereco = (TextView) findViewById(R.id.txtEndereco);
+		TextView txtBairro = (TextView) findViewById(R.id.txtBairro);
+		
+		Pedido p = Pedido.getInstancia();
+		txtNomeCliente.setText(p.NomeCliente);
+		txtTelefone.setText(p.Telefone);
+		txtEndereco.setText(p.Endereco);
+		txtBairro.setText(p.Bairro);
 		
 		Button btnConfirmarEndereco = (Button) findViewById(R.id.btnConfirmarEndereco);
 		btnConfirmarEndereco.setOnClickListener(new OnClickListener() {

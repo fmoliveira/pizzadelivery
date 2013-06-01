@@ -19,10 +19,31 @@ namespace DeliveryManager
             txtDataHora.Text = pedido.Data.ToString("dd/MM/yyyy HH:mm:ss");
             txtEspera.Text = pedido.Espera + " min";
             txtCliente.Text = pedido.NomeCliente;
+            txtTelefone.Text = pedido.Telefone.ToString();
             txtEndereco.Text = pedido.Endereco;
             txtBairro.Text = pedido.Bairro;
 
-            txtValorTotal.Text = string.Format("R$ {0:#,##0.00}", pedido.ValorTotal);
+            lstItensPedido.Items.Clear();
+            lstItensPedido.Groups.Clear();
+            lstItensPedido.Columns.Clear();
+            lstItensPedido.View = View.Details;
+
+            lstItensPedido.Columns.Add("Item", 150);
+            lstItensPedido.Columns.Add("Vlr Unit", 70);
+            lstItensPedido.Columns.Add("Qtde", 40);
+            lstItensPedido.Columns.Add("Subtotal", 70);
+
+            foreach (ItemPedido item in pedido.ItensPedido)
+            {
+                ListViewItem i = new ListViewItem();
+                i.Text = item.ToString();
+                i.SubItems.Add(item.ValorUnitario.ToDinheiro());
+                i.SubItems.Add(item.Quantidade.ToString());
+                i.SubItems.Add((item.ValorUnitario * item.Quantidade).ToDinheiro());
+                lstItensPedido.Items.Add(i);
+            }
+
+            txtValorTotal.Text = pedido.ValorTotal.ToDinheiro();
 
             switch(pedido.FormaPagto)
             {

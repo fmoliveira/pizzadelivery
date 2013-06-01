@@ -16,7 +16,7 @@ namespace DeliveryLibrary
 
         public string NomeCliente { get; set; }
 
-        public int Telefone { get; set; }
+        public string Telefone { get; set; }
 
         public string Endereco { get; set; }
 

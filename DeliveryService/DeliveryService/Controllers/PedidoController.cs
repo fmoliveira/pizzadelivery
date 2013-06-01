@@ -35,7 +35,7 @@ namespace DeliveryService.Controllers
 
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT p.PedidoId, p.Data, p.Espera, p.NomeCliente, p.Endereco, p.Bairro, p.FormaPagto, p.TrocoPara, i.Id, i.Tipo, i.Tamanho, i.Quantidade, i.ValorUnitario FROM Pedidos AS p INNER JOIN PedidosItens AS i ON i.PedidoId = p.PedidoId WHERE p.Data > @Data ORDER BY p.PedidoId, i.Indice;";
+                cmd.CommandText = "SELECT p.PedidoId, p.Data, p.Espera, p.NomeCliente, p.Telefone, p.Endereco, p.Bairro, p.FormaPagto, p.TrocoPara, i.Id, i.Tipo, i.Tamanho, i.Quantidade, i.ValorUnitario FROM Pedidos AS p INNER JOIN PedidosItens AS i ON i.PedidoId = p.PedidoId WHERE p.Data > @Data ORDER BY p.PedidoId, i.Indice;";
                 cmd.Parameters.AddWithValue("@Data", min);
                 reader = cmd.ExecuteReader();
 
@@ -57,6 +57,7 @@ namespace DeliveryService.Controllers
                             p.Data = (DateTime)reader["Data"];
                             p.Espera = 45; // (int)reader["Espera"];
                             p.NomeCliente = reader["NomeCliente"].ToString();
+                            p.Telefone = reader["Telefone"].ToString();
                             p.Endereco = reader["Endereco"].ToString();
                             p.Bairro = reader["Bairro"].ToString();
                             p.FormaPagto = (int)reader["FormaPagto"];
@@ -102,7 +103,6 @@ namespace DeliveryService.Controllers
         // POST api/pedido
         public HttpResponseMessage Post(Pedido pedido)
         {
-            JavaScriptSerializer json = new JavaScriptSerializer();
             SqlConnection conn = new SqlConnection(connstr);
             SqlTransaction tran = null;
             SqlCommand cmd = null;
@@ -116,7 +116,7 @@ namespace DeliveryService.Controllers
                 cmd.CommandType = CommandType.Text;
                 cmd.Transaction = tran;
 
-                cmd.CommandText = string.Format("INSERT INTO Pedidos (Data, NomeCliente, Endereco, Bairro, FormaPagto, TrocoPara, Espera) VALUES ('{0:yyyy-MM-dd HH:mm:ss}', '{1}', '{2}', '{3}', {4}, {5}, 45);", DateTime.Now, pedido.NomeCliente, pedido.Endereco, pedido.Bairro, pedido.FormaPagto, pedido.TrocoPara);
+                cmd.CommandText = string.Format("INSERT INTO Pedidos (Data, NomeCliente, Telefone, Endereco, Bairro, FormaPagto, TrocoPara, Espera) VALUES ('{0:yyyy-MM-dd HH:mm:ss}', '{1}', '{6}', '{2}', '{3}', {4}, {5}, 45);", DateTime.Now, pedido.NomeCliente, pedido.Endereco, pedido.Bairro, pedido.FormaPagto, pedido.TrocoPara, pedido.Telefone);
                 cmd.ExecuteNonQuery();
 
                 object o;

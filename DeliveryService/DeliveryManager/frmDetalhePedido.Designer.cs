@@ -33,7 +33,7 @@
             this.lblCliente = new System.Windows.Forms.Label();
             this.lblEndereco = new System.Windows.Forms.Label();
             this.lblBairro = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lstItensPedido = new System.Windows.Forms.ListView();
             this.lblValorTotal = new System.Windows.Forms.Label();
             this.lblFormaPagto = new System.Windows.Forms.Label();
             this.txtDataHora = new System.Windows.Forms.Label();
@@ -96,15 +96,15 @@
             this.lblBairro.TabIndex = 10;
             this.lblBairro.Text = "Bairro:";
             // 
-            // listView1
+            // lstItensPedido
             // 
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(12, 90);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(360, 227);
-            this.listView1.TabIndex = 12;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.lstItensPedido.FullRowSelect = true;
+            this.lstItensPedido.Location = new System.Drawing.Point(12, 90);
+            this.lstItensPedido.MultiSelect = false;
+            this.lstItensPedido.Name = "lstItensPedido";
+            this.lstItensPedido.Size = new System.Drawing.Size(360, 227);
+            this.lstItensPedido.TabIndex = 12;
+            this.lstItensPedido.UseCompatibleStateImageBehavior = false;
             // 
             // lblValorTotal
             // 
@@ -260,7 +260,7 @@
             this.Controls.Add(this.lblTrocoPara);
             this.Controls.Add(this.lblFormaPagto);
             this.Controls.Add(this.lblValorTotal);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lstItensPedido);
             this.Controls.Add(this.lblBairro);
             this.Controls.Add(this.lblEndereco);
             this.Controls.Add(this.lblTelefone);
@@ -287,7 +287,7 @@
         private System.Windows.Forms.Label lblCliente;
         private System.Windows.Forms.Label lblEndereco;
         private System.Windows.Forms.Label lblBairro;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lstItensPedido;
         private System.Windows.Forms.Label lblValorTotal;
         private System.Windows.Forms.Label lblFormaPagto;
         private System.Windows.Forms.Label txtDataHora;
