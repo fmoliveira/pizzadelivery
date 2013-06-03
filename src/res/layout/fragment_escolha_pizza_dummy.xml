@@ -1,7 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:ignore="UseCompoundDrawables" >
 
     <ImageView
         android:id="@+id/imgSaborPizza"
@@ -19,7 +21,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:gravity="top|center"
-        android:text="Descrição da Pizza"
+        android:text="@string/descri_o_da_pizza"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </LinearLayout>

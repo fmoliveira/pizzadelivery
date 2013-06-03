@@ -1,7 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:ignore="ButtonStyle" >
 
     <ListView
         android:id="@+id/lstPedido"
@@ -16,7 +18,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="30dp"
-        android:text="Nenhum item no carrinho."
+        android:text="@string/nenhum_item_no_carrinho_"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
@@ -34,14 +36,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="Total"
+            android:text="@string/total"
             android:textAppearance="?android:attr/textAppearance" />
 
         <TextView
             android:id="@+id/txtSimbMoedaTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R$"
+            android:text="@string/r_"
             android:textAppearance="?android:attr/textAppearance" />
 
         <TextView
@@ -51,7 +53,9 @@
             android:layout_gravity="right"
             android:gravity="right"
             android:text="500,00"
-            android:textAppearance="?android:attr/textAppearance" />
+            android:textAppearance="?android:attr/textAppearance"
+            tools:ignore="HardcodedText" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -66,7 +70,7 @@
             android:layout_height="60dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="Mais\nPizza"
+            android:text="@string/mais_npizza"
             android:textAppearance="?android:attr/textAppearance" />
 
         <Button
@@ -75,7 +79,7 @@
             android:layout_height="60dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="Mais\nBebida"
+            android:text="@string/mais_nbebida"
             android:textAppearance="?android:attr/textAppearance" />
 
         <Button
@@ -84,9 +88,8 @@
             android:layout_height="60dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:text="Fechar\nPedido"
+            android:text="@string/fechar_npedido"
             android:textAppearance="?android:attr/textAppearance" />
-
     </LinearLayout>
 
 </LinearLayout>

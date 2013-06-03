@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="150dp"
-        android:text="Pedido realizado com sucesso!"
+        android:text="@string/pedido_realizado_com_sucesso_"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Tempo médio de espera:"
+        android:text="@string/tempo_m_dio_de_espera_"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:text="45 min"
+        android:text="@string/_45_min"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -44,6 +44,6 @@
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="Ok" />
+        android:text="@string/ok" />
 
 </RelativeLayout>

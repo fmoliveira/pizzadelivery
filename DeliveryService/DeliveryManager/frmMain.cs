@@ -16,14 +16,13 @@ namespace DeliveryManager
 {
     public partial class frmMain : Form
     {
-        private const string api = "http://localhost:63365/api/pedido";
         private Timer mTimer = null;
 
         public frmMain()
         {
             InitializeComponent();
             mTimer = new Timer();
-            mTimer.Interval = 1000;
+            mTimer.Interval = 3000;
             mTimer.Tick += mTimer_Tick;
             mTimer.Start();
         }
@@ -62,9 +61,18 @@ namespace DeliveryManager
 
         private void ListarPedidos()
         {
-            string endPoint = string.Format("http://localhost/DeliveryService/api/pedido/{0}", mUltimoPedido);
+            string endPoint = string.Format("http://www.fmoliveira.com.br/PizzaService/api/pedido/{0}", mUltimoPedido);
             var client = new RestClient(endPoint);
-            string json = client.MakeRequest();
+            string json = null;  
+
+            try
+            {
+                json = client.MakeRequest();
+            }
+            catch (Exception)
+            {
+                return;
+            }
 
             JavaScriptSerializer js = new JavaScriptSerializer();
             List<Pedido> lista = js.Deserialize<List<Pedido>>(json);

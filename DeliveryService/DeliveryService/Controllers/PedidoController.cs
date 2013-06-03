@@ -13,7 +13,7 @@ namespace DeliveryService.Controllers
 {
     public class PedidoController : ApiController
     {
-        private string connstr = "Data Source=localhost; User Id=sa; Password=eugenia; Initial Catalog=PizzaDelivery;";
+        private string connstr = "Data Source=fmoliveira.com.br; User Id=fmoenguser; Password=%fM0#3nG!h05T7!!@; Initial Catalog=fmoeng;";
 
         // GET api/pedido
         public IEnumerable<Pedido> Get(int id)
@@ -35,7 +35,7 @@ namespace DeliveryService.Controllers
 
                 cmd = conn.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT p.PedidoId, p.Data, p.Espera, p.NomeCliente, p.Telefone, p.Endereco, p.Bairro, p.FormaPagto, p.TrocoPara, i.Id, i.Tipo, i.Tamanho, i.Quantidade, i.ValorUnitario FROM Pedidos AS p INNER JOIN PedidosItens AS i ON i.PedidoId = p.PedidoId WHERE p.Data > @Data ORDER BY p.PedidoId, i.Indice;";
+                cmd.CommandText = "SELECT p.PedidoId, p.Data, p.Espera, p.NomeCliente, p.Telefone, p.Endereco, p.Bairro, p.FormaPagto, p.TrocoPara, i.Id, i.Tipo, i.Tamanho, i.Quantidade, i.ValorUnitario FROM [PizzaDelivery.Pedidos] AS p INNER JOIN [PizzaDelivery.PedidosItens] AS i ON i.PedidoId = p.PedidoId WHERE p.Data > @Data ORDER BY p.PedidoId, i.Indice;";
                 cmd.Parameters.AddWithValue("@Data", min);
                 reader = cmd.ExecuteReader();
 
@@ -116,12 +116,16 @@ namespace DeliveryService.Controllers
                 cmd.CommandType = CommandType.Text;
                 cmd.Transaction = tran;
 
-                cmd.CommandText = string.Format("INSERT INTO Pedidos (Data, NomeCliente, Telefone, Endereco, Bairro, FormaPagto, TrocoPara, Espera) VALUES ('{0:yyyy-MM-dd HH:mm:ss}', '{1}', '{6}', '{2}', '{3}', {4}, {5}, 45);", DateTime.Now, pedido.NomeCliente, pedido.Endereco, pedido.Bairro, pedido.FormaPagto, pedido.TrocoPara, pedido.Telefone);
+                TimeZoneInfo brt = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+                DateTime utc = DateTime.UtcNow;
+                DateTime dataPedido = TimeZoneInfo.ConvertTimeFromUtc(utc, brt);
+
+                cmd.CommandText = string.Format("INSERT INTO [PizzaDelivery.Pedidos] (Data, NomeCliente, Telefone, Endereco, Bairro, FormaPagto, TrocoPara, Espera) VALUES ('{0:yyyy-MM-dd HH:mm:ss}', '{1}', '{6}', '{2}', '{3}', {4}, {5}, 45);", dataPedido, pedido.NomeCliente, pedido.Endereco, pedido.Bairro, pedido.FormaPagto, pedido.TrocoPara, pedido.Telefone);
                 cmd.ExecuteNonQuery();
 
                 object o;
                 int id = 0;
-                cmd.CommandText = "SELECT MAX(PedidoId) FROM Pedidos;";
+                cmd.CommandText = "SELECT MAX(PedidoId) FROM [PizzaDelivery.Pedidos];";
                 o = cmd.ExecuteScalar();
 
                 if (o != null && o is int)
@@ -130,7 +134,7 @@ namespace DeliveryService.Controllers
 
                     for (int i = 0; i < pedido.ItensPedido.Count; i++)
                     {
-                        cmd.CommandText = string.Format("INSERT INTO PedidosItens (PedidoId, Indice, Id, Tipo, Tamanho, Quantidade, ValorUnitario) VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6});", id, i + 1, pedido.ItensPedido[i].Id, pedido.ItensPedido[i].Tipo, pedido.ItensPedido[i].Tamanho, pedido.ItensPedido[i].Quantidade, pedido.ItensPedido[i].ValorUnitario);
+                        cmd.CommandText = string.Format("INSERT INTO [PizzaDelivery.PedidosItens] (PedidoId, Indice, Id, Tipo, Tamanho, Quantidade, ValorUnitario) VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6});", id, i + 1, pedido.ItensPedido[i].Id, pedido.ItensPedido[i].Tipo, pedido.ItensPedido[i].Tamanho, pedido.ItensPedido[i].Quantidade, pedido.ItensPedido[i].ValorUnitario.ToString().Replace(",", "."));
                         cmd.ExecuteNonQuery();
                     }
                 }

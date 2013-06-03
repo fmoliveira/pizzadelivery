@@ -1,29 +1,10 @@
 package com.example.pizzadelivery;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
-
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Looper;
 import android.app.Activity;
@@ -98,7 +79,6 @@ public class PagamentoActivity extends Activity {
 	{
 		RadioButton radPagtoDinheiro = (RadioButton) findViewById(R.id.radPagtoDinheiro);
 		RadioButton radPagtoMaster = (RadioButton) findViewById(R.id.radPagtoMaster);
-		RadioButton radPagtoVisa = (RadioButton) findViewById(R.id.radPagtoVisa);
 		View grpTrocoPara = findViewById(R.id.grpTrocoPara);
 		View grpValorTroco = findViewById(R.id.grpValorTroco);
 
@@ -186,7 +166,8 @@ public class PagamentoActivity extends Activity {
                 try
                 {
                     DefaultHttpClient client = new DefaultHttpClient();
-                    HttpPost post = new HttpPost("http://192.168.1.101/DeliveryService/api/pedido");
+                    HttpPost post = new HttpPost("http://www.fmoliveira.com.br/PizzaService/api/pedido");
+//                    HttpPost post = new HttpPost("http://fmoliveira.no-ip.biz/DeliveryService/api/pedido");
                     StringEntity se = new StringEntity(json);
                     post.setEntity(se);
                     post.setHeader("Accept", "application/json");

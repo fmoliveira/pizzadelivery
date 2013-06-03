@@ -1,5 +1,6 @@
 package com.example.pizzadelivery;
 
+import android.annotation.SuppressLint;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,6 +150,12 @@ public final class Pedido {
 	
 	public static void resetarPedido()
 	{
+		getInstancia().NomeCliente = "";
+		getInstancia().Telefone = "";
+		getInstancia().Endereco = "";
+		getInstancia().Bairro = "";
+		getInstancia().FormaPagto = 0;
+		getInstancia().TrocoPara = 0.0;
 		getMeuPedido().clear();
 		mValorTotal = 0.0;
 	}

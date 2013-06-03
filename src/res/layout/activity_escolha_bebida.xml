@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" xmlns:tools="http://schemas.android.com/tools" tools:ignore="ButtonStyle">
 	
 	<android.support.v4.view.ViewPager
 	    android:id="@+id/pagerBebidas"
@@ -27,7 +27,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="R$ 5,00"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        tools:ignore="HardcodedText" />
 
 	<LinearLayout
 	    android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center_horizontal"
 	        android:layout_marginRight="10dp"
-	        android:text="Adicionar Bebida" />
+	        android:text="@string/adicionar_bebida" />
 	
 	    <Button
 	        android:id="@+id/btnFecharPedido"
@@ -49,7 +50,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center_horizontal"
 	        android:layout_marginLeft="10dp"
-	        android:text="Fechar Pedido" />
+	        android:text="@string/fechar_pedido" />
 	
 	</LinearLayout>
 

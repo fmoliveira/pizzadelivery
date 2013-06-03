@@ -1,4 +1,7 @@
-CREATE TABLE Pedidos
+CREATE SCHEMA PizzaDelivery;
+GO
+
+CREATE TABLE [PizzaDelivery.Pedidos]
 (
 	PedidoId INT NOT NULL IDENTITY(1,1),
 	Data DATETIME NOT NULL,
@@ -8,7 +11,7 @@ CREATE TABLE Pedidos
 	Bairro VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE PedidosItens
+CREATE TABLE [PizzaDelivery.PedidosItens]
 (
 	PedidoId INT NOT NULL,
 	Indice INT NOT NULL,
@@ -18,8 +21,8 @@ CREATE TABLE PedidosItens
 	Quantidade INT NOT NULL
 );
 
-ALTER TABLE PedidosItens ADD ValorUnitario DECIMAL(5,2) NOT NULL DEFAULT 0.0;
+ALTER TABLE [PizzaDelivery.PedidosItens] ADD ValorUnitario DECIMAL(5,2) NOT NULL DEFAULT 0.0;
 
-ALTER TABLE Pedidos ADD FormaPagto INT NOT NULL DEFAULT 1;
-ALTER TABLE Pedidos ADD TrocoPara DECIMAL(6,2) NOT NULL DEFAULT 0.0;
-ALTER TABLE Pedidos ADD Telefone VARCHAR(20) NOT NULL DEFAULT '';
+ALTER TABLE [PizzaDelivery.Pedidos] ADD FormaPagto INT NOT NULL DEFAULT 1;
+ALTER TABLE [PizzaDelivery.Pedidos] ADD TrocoPara DECIMAL(6,2) NOT NULL DEFAULT 0.0;
+ALTER TABLE [PizzaDelivery.Pedidos] ADD Telefone VARCHAR(20) NOT NULL DEFAULT '';

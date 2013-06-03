@@ -116,10 +116,42 @@ public final class R {
         public static final int menu_pedido=0x7f070000;
     }
     public static final class string {
+        public static final int _45_min=0x7f05001b;
         public static final int action_meu_pedido=0x7f050001;
+        public static final int adicionar_bebida=0x7f050009;
+        public static final int adicionar_pizza=0x7f05000e;
         public static final int app_name=0x7f050000;
+        public static final int bairro_=0x7f050007;
+        public static final int confirmar=0x7f050008;
+        public static final int descri_o_da_bebida=0x7f050022;
+        public static final int descri_o_da_pizza=0x7f050023;
+        public static final int dinheiro=0x7f050011;
+        public static final int endere_o_=0x7f050006;
+        public static final int escolher_bebidas=0x7f05000f;
+        public static final int fechar_npedido=0x7f050021;
+        public static final int fechar_pedido=0x7f05000a;
+        public static final int forma_de_pagamento_=0x7f050010;
+        public static final int gigante=0x7f05000d;
+        public static final int grande=0x7f05000c;
+        public static final int mais_nbebida=0x7f050020;
+        public static final int mais_npizza=0x7f05001f;
+        public static final int master_card_cr_dito_d_bito=0x7f050012;
         public static final int menu_fazer_pedido=0x7f050002;
         public static final int menu_sair=0x7f050003;
+        public static final int nenhum_item_no_carrinho_=0x7f05001d;
+        public static final int nome_=0x7f050004;
+        public static final int ok=0x7f05001c;
+        public static final int pedido_realizado_com_sucesso_=0x7f050019;
+        public static final int postar_pedido=0x7f050018;
+        public static final int r_=0x7f050015;
+        public static final int tamanho_=0x7f05000b;
+        public static final int telefone_=0x7f050005;
+        public static final int tempo_m_dio_de_espera_=0x7f05001a;
+        public static final int total=0x7f05001e;
+        public static final int troco_para_=0x7f050016;
+        public static final int valor_do_troco_=0x7f050017;
+        public static final int valor_total_=0x7f050014;
+        public static final int visa_cr_dito_d_bito=0x7f050013;
     }
     public static final class style {
         /** 

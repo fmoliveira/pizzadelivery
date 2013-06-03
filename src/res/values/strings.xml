@@ -5,5 +5,37 @@
     <string name="action_meu_pedido">Meu Pedido</string>
     <string name="menu_fazer_pedido">Fazer Pedido</string>
     <string name="menu_sair">Sair</string>
+    <string name="nome_">Nome:</string>
+    <string name="telefone_">Telefone:</string>
+    <string name="endere_o_">Endereço:</string>
+    <string name="bairro_">Bairro:</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="adicionar_bebida">Adicionar Bebida</string>
+    <string name="fechar_pedido">Fechar Pedido</string>
+    <string name="tamanho_">Tamanho:</string>
+    <string name="grande">Grande</string>
+    <string name="gigante">Gigante</string>
+    <string name="adicionar_pizza">Adicionar Pizza</string>
+    <string name="escolher_bebidas">Escolher Bebidas</string>
+    <string name="forma_de_pagamento_">Forma de pagamento:</string>
+    <string name="dinheiro">Dinheiro</string>
+    <string name="master_card_cr_dito_d_bito">Master Card Crédito/Débito</string>
+    <string name="visa_cr_dito_d_bito">Visa Crédito/Débito</string>
+    <string name="valor_total_">Valor Total:</string>
+    <string name="r_">R$</string>
+    <string name="troco_para_">Troco Para:</string>
+    <string name="valor_do_troco_">Valor do Troco:</string>
+    <string name="postar_pedido">Postar Pedido</string>
+    <string name="pedido_realizado_com_sucesso_">Pedido realizado com sucesso!</string>
+    <string name="tempo_m_dio_de_espera_">Tempo médio de espera:</string>
+    <string name="_45_min">45 min</string>
+    <string name="ok">Ok</string>
+    <string name="nenhum_item_no_carrinho_">Nenhum item no carrinho.</string>
+    <string name="total">Total</string>
+    <string name="mais_npizza">Mais\nPizza</string>
+    <string name="mais_nbebida">Mais\nBebida</string>
+    <string name="fechar_npedido">Fechar\nPedido</string>
+    <string name="descri_o_da_bebida">Descrição da Bebida</string>
+    <string name="descri_o_da_pizza">Descrição da Pizza</string>
 
 </resources>

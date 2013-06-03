@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:paddingBottom="7sp"
     android:paddingLeft="5sp"
     android:paddingRight="5sp"
-    android:paddingTop="7sp"
-    android:paddingBottom="7sp" >
+    android:paddingTop="7sp" >
 
     <TextView
         android:id="@+id/txtQuantidade"
@@ -12,7 +13,8 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:text="10x"
-        android:textAppearance="?android:attr/textAppearance" />
+        android:textAppearance="?android:attr/textAppearance"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/txtItemPedido"
@@ -21,14 +23,16 @@
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:text="Item do pedido"
-        android:textAppearance="?android:attr/textAppearance" />
+        android:textAppearance="?android:attr/textAppearance"
+        tools:ignore="HardcodedText,InefficientWeight" />
 
     <TextView
         android:id="@+id/txtSimboloMoeda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R$"
-        android:textAppearance="?android:attr/textAppearance" />
+        android:textAppearance="?android:attr/textAppearance"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/txtSubtotal"
@@ -37,6 +41,7 @@
         android:layout_gravity="right"
         android:gravity="right"
         android:text="100,00"
-        android:textAppearance="?android:attr/textAppearance" />
+        android:textAppearance="?android:attr/textAppearance"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

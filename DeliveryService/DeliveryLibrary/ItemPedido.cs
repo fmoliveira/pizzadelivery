@@ -93,7 +93,7 @@ namespace DeliveryLibrary
                         break;
 
                     case 5:
-                        s += "Citrus";
+                        s += "Ice Tea";
                         break;
 
                     default:
