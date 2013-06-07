@@ -17,6 +17,7 @@ namespace DeliveryManager
     public partial class frmMain : Form
     {
         private Timer mTimer = null;
+        private bool mMutex = false;
 
         public frmMain()
         {
@@ -61,55 +62,66 @@ namespace DeliveryManager
 
         private void ListarPedidos()
         {
-            string endPoint = string.Format("http://www.fmoliveira.com.br/PizzaService/api/pedido/{0}", mUltimoPedido);
-            var client = new RestClient(endPoint);
-            string json = null;  
+            if (mMutex)
+            {
+                return;
+            }
+
+            mMutex = true;
 
             try
             {
-                json = client.MakeRequest();
+                string endPoint = string.Format("http://www.fmoliveira.com.br/PizzaService/api/pedido/{0}", mUltimoPedido);
+                var client = new RestClient(endPoint);
+                string json = client.MakeRequest();
+
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                List<Pedido> lista = js.Deserialize<List<Pedido>>(json);
+                ListViewItem item;
+                TimeSpan ts;
+                int unix, diff;
+
+                for (int i = 0; i < lstPedidos.Items.Count; i++)
+                {
+                    if (int.TryParse(lstPedidos.Items[i].SubItems[0].Text, out unix))
+                    {
+                        ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0);
+                        diff = ((int)ts.TotalSeconds) - unix;
+                        lstPedidos.Items[i].BackColor = (diff > 0 && diff < 30) ? Color.Khaki : Color.Transparent;
+                    }
+                }
+
+                foreach (Pedido p in lista)
+                {
+                    ts = p.Data - new DateTime(1970, 1, 1, 0, 0, 0);
+                    unix = (int)ts.TotalSeconds;
+
+                    item = new ListViewItem(unix.ToString());
+                    item.BackColor = Color.Khaki;
+                    item.SubItems.Add(p.Data.ToString("dd/MM/yyyy"));
+                    item.SubItems.Add(p.Data.ToString("HH:mm:ss"));
+                    item.SubItems.Add(string.Format("{0} min", p.Espera));
+                    item.SubItems.Add(p.NomeCliente);
+                    item.SubItems.Add(p.Bairro);
+                    item.SubItems.Add(string.Format("R$ {0:#,##0.00}", p.ValorTotal));
+                    item.Tag = p;
+                    lstPedidos.Items.Add(item);
+
+                    if (unix > mUltimoPedido)
+                    {
+                        mUltimoPedido = unix;
+                    }
+                }
+
+                mMutex = false;
             }
             catch (Exception)
             {
                 return;
             }
-
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            List<Pedido> lista = js.Deserialize<List<Pedido>>(json);
-            ListViewItem item;
-            TimeSpan ts;
-            int unix, diff;
-
-            for (int i = 0; i < lstPedidos.Items.Count; i++)
+            finally
             {
-                if (int.TryParse(lstPedidos.Items[i].SubItems[0].Text, out unix))
-                {
-                    ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0);
-                    diff = ((int)ts.TotalSeconds) - unix;
-                    lstPedidos.Items[i].BackColor = (diff > 0 && diff < 30) ? Color.Khaki : Color.Transparent;
-                }
-            }
-
-            foreach (Pedido p in lista)
-            {
-                ts = p.Data - new DateTime(1970, 1, 1, 0, 0, 0);
-                unix = (int)ts.TotalSeconds;
-
-                item = new ListViewItem(unix.ToString());
-                item.BackColor = Color.Khaki;
-                item.SubItems.Add(p.Data.ToString("dd/MM/yyyy"));
-                item.SubItems.Add(p.Data.ToString("HH:mm:ss"));
-                item.SubItems.Add(string.Format("{0} min", p.Espera));
-                item.SubItems.Add(p.NomeCliente);
-                item.SubItems.Add(p.Bairro);
-                item.SubItems.Add(string.Format("R$ {0:#,##0.00}", p.ValorTotal));
-                item.Tag = p;
-                lstPedidos.Items.Add(item);
-
-                if (unix > mUltimoPedido)
-                {
-                    mUltimoPedido = unix;
-                }
+                mMutex = false;
             }
         }
 

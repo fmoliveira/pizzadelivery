@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="1113bec3-8122-4520-8ab4-924dc4cee803" name="DiagramaClasses" linkedPackageId="d9922b68-7d70-48f9-994b-a5535b8e76c4" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="4e021a39-2682-4f69-95a8-007f1490a668">
+      <profileInstance Id="df63e4b3-4e20-4383-8555-e036de28ea82" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="1dfbe242-089c-44df-8161-075380913781">
+      <profileInstance Id="d7a010ae-3551-4c44-b748-786bbf7d58f9" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7c8b91a3-0160-49db-bb4b-4eac154506c7" name="Pedidos" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="897be2c4-b9e4-4ae3-992d-98765429127f" />
+        <targetEnds>
+          <association Id="54bd69f9-0bdd-4c62-913d-31b04a03cb21" isDerived="false" sourceEndRoleName="Pedidos" targetEndRoleName="PedidosItens" isLeaf="false" isAbstract="false">
+            <classMoniker Id="22209eda-0385-435e-905c-7f5a99493a4c" LastKnownName="PedidosItens" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c4c528e8-6d5d-4230-a99f-8fff62128ba8" name="Pedidos" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6ba32b22-c18c-4ff5-ac0b-fcedb2fc20a9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="829508e7-105c-486f-8f18-8cf4556827f6" name="PedidosItens" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="137a555c-fb84-44d7-98e5-b774b0a8cb21" name="Lower" value="1">
+                      <elementDefinition Id="fb30455e-14ce-4828-8ec0-e5bfa566c941" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="6d87ad70-ac26-4112-9360-f17affef4840" name="Upper" value=".n">
+                      <elementDefinition Id="9be17ad4-1d6b-4f53-b524-c390a9d88dcb" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="05eb37d2-07c6-4b14-aede-ac70ac8653d8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="18e21e84-e381-4fa3-84f6-187af49fe5d3" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="dc5dd3cc-0f5a-4863-817e-e77c6d685967" name="NomeCliente" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="859a0171-c155-45f5-8afa-60ae62ad7aed" />
+          </property>
+          <property Id="fd690ac1-4698-4d5d-baa3-b2c2b0d9c8bd" name="Telefone" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="fb365c72-1dbe-4c4b-ad49-579d23ed7de2" />
+          </property>
+          <property Id="031db7d6-0c1b-45b1-893d-33e9dd9e2b4d" name="Endereço" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="77910c1e-23cd-4d5c-a1be-defa9d9a08e6" />
+          </property>
+          <property Id="cee0cfdf-bc5c-4c06-9e67-c0ea136f4157" name="Bairro" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d2a21ef1-718a-4d1d-82e3-45d94edad8e4" />
+          </property>
+          <property Id="4f3671dc-3807-4b45-887c-3af4a6de5bb3" name="FormaPagamento" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="140a18be-3286-43d8-a2c4-e6b5ebaf5907" />
+          </property>
+          <property Id="19f7d21a-411d-459b-831b-2783069300aa" name="TrocoPara" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="8275a89b-af47-4908-bae0-9d06a66396e6" />
+          </property>
+          <property Id="b99f5e58-981d-4731-8533-26dd0677448b" name="ItensPedido" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="56abd988-78c5-4eaa-acc7-7de9aa4303e9" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="22209eda-0385-435e-905c-7f5a99493a4c" name="PedidosItens" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="881e31ae-2bfc-4fbb-8687-c9da3b7058ec" />
+        <ownedAttributesInternal>
+          <property Id="9ef62b27-ff80-443b-9674-67a61bd3c0e4" name="TipoItem" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="10db25c5-e48b-4e29-ba9b-5c60f8802325" />
+          </property>
+          <property Id="aa03e6d7-cd2d-49fd-9675-feef0d563621" name="IdItem" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="21b7ecc5-1390-430b-af5e-3fd2737b07dc" />
+          </property>
+          <property Id="9f690894-b341-4218-9d83-6b8760bd6d93" name="Tamanho" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a172a11c-2bed-4437-9bf7-8e8e838dc1c7" />
+          </property>
+          <property Id="faf9f69a-43ba-4db4-896d-520767b6c0ad" name="Quantidade" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b4cfb7f3-76bb-4d72-acef-0b3c707499cb" />
+          </property>
+          <property Id="9f3a838f-6cb6-4ecc-9c26-fcd9c647c8ba" name="ValorUnitario" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="389400f8-b4d2-4a5b-a11d-cf234e7db032" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="d9922b68-7d70-48f9-994b-a5535b8e76c4" name="PizzaModel">
+    <elementDefinition Id="fea4c4c9-5d74-4db5-aec2-983806e7006e" />
+  </package>
+</logicalClassDesignerModel>
